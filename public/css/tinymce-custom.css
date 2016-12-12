@@ -1,0 +1,4 @@
+/* TEXT EDITOR */
+body#tinymce.mce-content-body {
+    color: #000000 !important;
+}
