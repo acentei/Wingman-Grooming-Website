@@ -17,7 +17,7 @@
 
                         <div class="foot-subscribe">
                             <div class="ft-box">
-                                <input id="txtEmail" name="email" type="email" placeholder="YOUR E-MAIL">                                
+                                <input id="txtEmail" name="email" type="email" placeholder="YOUR E-MAIL" required>                                
                             </div>
                             <div class="ft-box ft-box-button">
                                 <input id="btnSubscribe" type="submit" value=" SUBSCRIBE">

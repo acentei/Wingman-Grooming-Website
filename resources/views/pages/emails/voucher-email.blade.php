@@ -2,11 +2,18 @@
 <html lang="en">
 
 	<head>
-		<style>				
+		<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+
+		<style>
+			html
+			{
+				font-family: Open Sans;
+			}
+							
 			.content
 		    {
 		        background:#fff;
-		        font-family: 'Roboto-Regular,Helvetica,Arial,sans-serif';		        
+		        /*font-family: 'Roboto-Regular,Helvetica,Arial,sans-serif';		        */
 		    }
 
 		    .response-container
@@ -22,7 +29,7 @@
 			{
 			    width: 100%;
 			    display: block;
-			    font-family: BebasNeue;
+			    /*font-family: BebasNeue;*/
 			    font-size: 35pt;
 			    color:#000;
 			    text-align: center;
@@ -34,7 +41,7 @@
 			    color: #bb2229;
 			    text-transform: uppercase;
 			    text-align: center;
-			    font-family: Gotham;
+			    /*font-family: Gotham;*/
 			    font-weight: bold;
 			    font-size: 10pt;
 			    letter-spacing: 2px;
@@ -55,7 +62,7 @@
 			    font-size: 10pt;
 			    line-height: 26px;
 			    text-align: center;
-			    font-family: Gotham;
+			    /*font-family: Gotham;*/
 			}
 
 			.response-img-container

@@ -2,20 +2,14 @@
 <html lang="en">
 
 	<head>
-		<style>
-			@font-face 
-			{
-			    src: url({{ URL::asset('/fonts/gotham.ttf') }});
-			    font-family: 'Gotham';
-			    font-style: normal;
-			}			
 
-			@font-face 
+		<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+
+		<style>
+			html
 			{
-			    src: url({{ URL::asset('/fonts/BebasNeue.otf') }});
-			    font-family: 'BebasNeue';
-			    font-style: normal;
-			}			
+				font-family: Open Sans;
+			}
 
 			.content
 		    {
@@ -35,7 +29,7 @@
 			{
 			    width: 100%;
 			    display: block;
-			    font-family: BebasNeue;
+			    /*font-family: BebasNeue;*/
 			    font-size: 35pt;
 			    color:#000;
 			    text-align: center;
@@ -57,7 +51,7 @@
 			    font-size: 10pt;
 			    line-height: 26px;
 			    text-align: center;
-			    font-family: Gotham;
+			    /*font-family: Gotham;*/
 			}
 
 			.response-img-container

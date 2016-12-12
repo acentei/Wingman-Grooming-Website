@@ -624,14 +624,12 @@
 			    </div>
 
 			    <div class="response-title-sub">
-			        Official Receipt
+			        Sales Invoice Receipt
 			    </div>
 			    
 			    <div class="response-receipt-note">
-			        <p>
-			            Your recent purchase at Wingman Grooming has been processsed and <b>Php {{number_format($totalPrice)}}</b> has been received.
-			            <br><br>
-			            <i>This email message will serve as your receipt.</i>
+			        <p>			            
+			            <i>This email message is a copy of a receipt from a recent purchase from your website.</i>
 			        </p>
 			    </div>
 			    
@@ -643,7 +641,7 @@
 				    	<b>NAME </b><br>{{$name}}<br><br>
 				    	<b>E-MAIL </b><br>{{$email}}<br><br>
 				    	<b>TIMESTAMP </b><br>{{$date}}<br><br>
-				    	<b>NOTES/SPECIAL INSTRUCTIONS </b><br>{{$date}}<br><br>				    	
+
 			    	</div>
 
 			    	
@@ -698,19 +696,11 @@
 			                </div>       
 			            </div>
 			        </div>
-			    </div>
-			    
-			    <div class="response-receipt-img-container">
-			    
-			        <img src="http://www.hersheys.com/assets/images/kisses/products/cookies_creme.png">
-			    
-			    </div>
+			    </div>		
 
 			    <div class="response-receipt-note">
 			        <p>
-			            © COPYRIGHT 2016 Wingman Mercatura, Inc. All rights reserved.
-			            <br><br>
-			            You are receiving this email because of your previous engagement on our website.
+			            © COPYRIGHT 2016 Wingman Mercatura, Inc. All rights reserved.			            
 			        </p>
 			    </div>
 

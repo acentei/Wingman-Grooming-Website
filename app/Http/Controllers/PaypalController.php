@@ -27,8 +27,10 @@ class PaypalController extends Controller
         }
 
         $params = array(
-            'cancelUrl'=>'http://www.wingmangrooming.com/payment/cancel_order',
-            'returnUrl'=>'http://www.wingmangrooming.com/payment/payment_success',
+            // 'cancelUrl'=>'http://www.wingmangrooming.com/payment/cancel_order',
+            // 'returnUrl'=>'http://www.wingmangrooming.com/payment/payment_success',
+            'cancelUrl'=>'http://localhost:8080/wingmangrooming/public/index.php/payment/cancel_order',
+            'returnUrl'=>'http://localhost:8080/wingmangrooming/public/index.php/payment/payment_success',
             'noshipping' => '1',
             'amount' =>  str_replace(",", "", Cart::total()),
             'currency' => 'PHP'
@@ -151,15 +153,32 @@ class PaypalController extends Controller
             $data = array(
                             'totalPrice' => $params['amount'],
                             'items' => $itemParams,
+                            'name' => $orderParams['fullname'],
+                            'email' => $orderParams['email'],
+                            'date' => date("D M j,Y h:i:sa T"),
+                            'code' => $randCode,
                             'voucher' => 'none yet',
+                            'notes' => '',
                     );
+
+            if($orderParams['notes'])
+            {
+                $data['notes'] => $orderParams['notes'];
+            }
 
             Mail::send('pages.emails.receipt-email', $data, function($message) use ($data)
             {
                 $message->subject('Wingman Grooming E-Receipt');
                 $message->from('ecommerce.mark8@gmail.com', 'Wingman Grooming');
-                $message->to('ecommerce.mark8@gmail.com');
+                $message->to($data['email']);
             });
+
+            Mail::send('pages.emails.invoice-email', $data, function($message) use ($data)
+            {
+                $message->subject('Wingman Grooming Sales Invoice');
+                $message->from('ecommerce.mark8@gmail.com', 'Wingman Grooming');
+                $message->to($data['email']);
+            });            
 
             Cart::destroy();
 

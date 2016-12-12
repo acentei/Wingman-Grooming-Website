@@ -55,7 +55,7 @@ return [
     |
     */
 
-    'from' => ['address' => 'address', 'name' => 'name'],
+    'from' => ['address' => 'ecommerce.mark8@gmail.com', 'name' => 'Wingman Grooming'],
     
     /*
     |--------------------------------------------------------------------------

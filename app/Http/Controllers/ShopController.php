@@ -33,6 +33,7 @@ class ShopController extends Controller
         //return dynamic values
         $brand = Brand::where('active',1)
                       ->where('deleted',0)
+                      ->orderBy('display_name','ASC')     
                       ->get();
         
         $type = ProductType::where('active',1)

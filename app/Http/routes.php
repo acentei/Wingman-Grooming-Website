@@ -31,8 +31,8 @@ Route::get('/wholesale-inquiry/sent', function () {
     return view('pages.responses.wholesale');
 });
 
-Route::get('/promo-email', function () {    
-    return view('pages.emails.voucher-email');
+Route::get('/receipt-email', function () {    
+    return view('pages.emails.receipt-email');
 });
 
 Route::resource('newsletter','NewsletterController');
@@ -54,6 +54,7 @@ Route::resource('home','HomepageController');
 Route::resource('carousel','CarouselController');
 Route::resource('order','OrderController');
 Route::resource('sales','SalesController');
+Route::resource('inventory','InventoryController');
 
 /* CUSTOM CONTROLLERS */
 Route::get('newsletter/{date}/{slug}', [
