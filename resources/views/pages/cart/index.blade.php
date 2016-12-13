@@ -104,10 +104,8 @@
 <!---end here -->
 
 <div class="voucher-container">
-    Vouchers <br><br>
     <label id="v-label" class="control-label" style="display:none;" for="voucher"></label>
-    <input id="input-vouch" type="text" name="voucher" />
-    <span id="v-help-b" style="display:none;" class="help-block"></span><br>
+    <input id="input-vouch" type="text" name="voucher" placeholder="Enter Voucher Code"/>
     <a id="btnVoucher" href="#">USE VOUCHER</a>
 </div>
 
@@ -127,16 +125,16 @@
             Discount
         </div>
         <div class="right">
-            00.00
+           PHP 00.00
         </div>
     </div>
     
     <div class="per-extra-container">
-        <div class="left">
+        <div class="left-sec">
             Total
         </div>
-        <div class="right">
-            00.00
+        <div class="right-sec">
+           PHP 00.00
         </div>
     </div>
 </div>

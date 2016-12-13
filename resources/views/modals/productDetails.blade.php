@@ -69,7 +69,7 @@
                         
                         <div class="modal-product-detials-bot">           
                             
-                            <hr style="border-color:#999; width: 95%; float: left;">
+                            <hr style="border-color:#999; width: 100%; float: left;">
 
                             
                             <div class="product-description">

@@ -201,11 +201,12 @@ input[type=file]
 .top-header-right
 {
     position: absolute;
-    top: -120px;
+    top: 25px;
+    right: 0;
     text-align: left;
     font-size: 9pt;
-    padding-left: 22px;
     width: 180px;
+    z-index: 1002;
 }
 
 .top-header-right a
@@ -228,6 +229,52 @@ input[type=file]
 .top-header-cart span
 {
     padding-right: 7px;
+}
+
+/* CHILD OF TOP-HEADER-RIGHT */
+.navbar-social
+{
+    margin-top: 100px;
+    margin-left: -24px;
+    transition: all 0.6s ease;
+}
+
+.navbar-social > a > img
+{
+    width: 20px;
+    height: 20px;
+    border-radius: 10px;
+    margin: 0 5px;
+}
+
+.navbar-social a#facebook img:hover
+{
+    background: #3b5998;    
+}
+
+.navbar-social a#facebook:hover
+{
+    background: #000; 
+}
+
+.navbar-social a#instagram img:hover
+{
+    background: #e95950;
+}
+
+.navbar-social a#instagram:hover
+{
+    background: #000;    
+}
+
+.navbar-social a#twitter img:hover
+{
+    background: #55acee;
+}
+
+.navbar-social a#twitter:hover
+{
+    background: #000;    
 }
 
 /* NAVBAR */
@@ -254,6 +301,7 @@ input[type=file]
 
 .navbar-nav li a 
 {
+    font-family: Gotham;
     line-height: 0; 
     padding-top: 17.5px;
     padding-bottom: 17.5px;
@@ -306,36 +354,6 @@ input[type=file]
     padding: 2px 0px;
 }
 
-.navbar-right a#facebook img:hover
-{
-    background: #3b5998;    
-}
-
-.navbar-right li a#facebook:hover
-{
-    background: #000;    
-}
-
-.navbar-right a#instagram img:hover
-{
-    background: #e95950;
-}
-
-.navbar-right li a#instagram:hover
-{
-    background: #000;    
-}
-
-.navbar-right a#twitter img:hover
-{
-    background: #55acee;
-}
-
-.navbar-right li a#twitter:hover
-{
-    background: #000;    
-}
-
 .navbar-nav li a:hover
 {    
     color: #000 !important;
@@ -352,8 +370,7 @@ input[type=file]
 div#navbar
 {
     /*position: fixed;*/
-    width: 100%;
-    z-index: 10;    
+    width: 100%;    
 }
 
 ul#slide-list{
@@ -482,6 +499,7 @@ ul#slide-list{
     width: 100%;
     background-color: #101010;
     padding: 5px;
+    margin-top: 70px;
 }
 
 .underline {
@@ -1199,7 +1217,7 @@ input#txtEmail:focus {
 {
     font-family: BebasNeue;
     font-size: 16pt;
-    padding-top: 60px;
+    padding-top: 20px;
     padding-bottom: 25px;
     color: #717171;
 }
@@ -1226,12 +1244,13 @@ input#txtEmail:focus {
 .browse-list-name:hover
 {
     color: #fff;
-    background: #000;
+    background: #515151;
+    text-decoration: none;
 }
 
 .list-active
 {
-    background: #000;
+    background: #515151;
     color: #fff;
     font-weight: bold;    
     text-decoration: none;
@@ -1241,6 +1260,7 @@ input#txtEmail:focus {
 {
     width: 80%;
     display: inline-block;
+    padding-top: 20px;
 }
 
 .shop-category
@@ -1326,7 +1346,7 @@ input#txtEmail:focus {
 
 .prod-detail-name
 {
-    height: 40px;    
+     /*height: 40px;  */  
 }
 
 .prod-detail-price
@@ -1410,7 +1430,7 @@ input#txtEmail:focus {
     text-transform: uppercase;
     text-align: left;
     padding-left: 7px;
-    border: 1px #000 solid;
+    border: 1px #515151 solid;
     padding-bottom: 5px;
     margin: auto;
     width: 95%;
@@ -1529,6 +1549,11 @@ input#txtEmail:focus {
     padding-left: 15px;
 }
 
+modal-order-details span
+{
+    margin-right: 5px;
+}
+
 .modal-order-table thead
 {
     font-family: Gotham;
@@ -1632,7 +1657,7 @@ input#txtEmail:focus {
 
 .modal-shop-name
 {
-    padding-left: 15px;
+    padding-left: 0;
     margin-top: -10px;
     margin-bottom: -10px;
     font-family: BebasNeue;
@@ -1646,6 +1671,7 @@ input#txtEmail:focus {
     text-align: right;
     margin-top: -5px;
     margin-bottom: 5px;
+    margin-left: 9%;
 }
 
 .modal-close a
@@ -1672,7 +1698,7 @@ input#txtEmail:focus {
 
 .modal-product-details
 {
-    width: 50%;
+    width: 46%;
 }
 
 .details-top
@@ -1682,8 +1708,8 @@ input#txtEmail:focus {
 
 .details-left
 {
-    width: 50%;
-    padding-left: 15px;
+    width: 52%;
+    padding-left: 0;
 }
 
 .modal-product-name
@@ -1692,23 +1718,27 @@ input#txtEmail:focus {
     font-size: 15pt;
     overflow-wrap: break-word;    
     text-transform: uppercase;
+    line-height: 17px;
+    margin-top: 12px;
 }
 
-.modal-product-price
+.modal-product-price 
 {
-    font-size: 15pt;
+    font-size: 14pt;
+    margin-top: 5px;
 }
 
 .details-right
 {
-    width: 45%;
+    width: 48%;
     padding-top: 25px;
+    text-align: right;
 }
 
 .modal-product-detials-bot
 {
-    padding-left: 15px;
-    padding-top: 20px;
+    padding-left: 0;
+    padding-top: 0px;
 }
 
 .details-properties
@@ -1738,7 +1768,8 @@ input#txtEmail:focus {
 .product-description
 {
     font-size: 10pt;
-    font-weight: bold;
+    line-height: 16px;
+    text-align: justify;
 }
 
 .product-ingredients
@@ -2026,19 +2057,19 @@ input#txtEmail:focus {
     padding: 2px;
     margin: 10px 0;
     width: 50%;
-    display: block;
+    display: inline-block;
 }
 
 .subtotal-container
 {
-    min-width: 30%;
+    min-width: 35%;
     height: 60px;
     border: 1px solid #999;
     float: right;
     margin-top: 10px;
     display: block;
     margin-right: 5%;
-    font-size: 10pt;
+    font-size: 12pt;
     color: #000;
 }
 
@@ -2067,13 +2098,12 @@ input#txtEmail:focus {
 {
     display: block;
     clear:both;
-    min-width: 30%;
-    height: 60px;
+    min-width: 35%;
+    height: 90px;
     border: 1px solid #999;
     border-top: none;
     float: right;
     margin-right: 5%;
-    font-size: 10pt;
     color: #000; 
 }
 
@@ -2098,6 +2128,19 @@ input#txtEmail:focus {
     border-right: 1px solid #999;
     text-align: center;
     line-height: 30px;
+    font-size: 10pt;
+}
+
+.per-extra-container > .left-sec
+{
+    height: 60px;
+    text-transform: uppercase;
+    min-width: 30%;
+    float:left;
+    border-right: 1px solid #999;
+    text-align: center;
+    line-height: 60px;
+    font-size: 12pt;
 }
 
 .per-extra-container > .right
@@ -2109,17 +2152,31 @@ input#txtEmail:focus {
     text-transform: uppercase;
     text-align: center;
     line-height: 30px;
+    font-size: 10pt;
+}
+
+.per-extra-container > .right-sec
+{
+    width: 70%;
+    overflow: hidden;
+    height: 60px;
+    float:right;
+    text-transform: uppercase;
+    text-align: center;
+    line-height: 60px;
+    font-size: 12pt;
 }
 
 .cart-divider
 {
     clear: both;
     display: block;
-    width: 105%;
-    border-bottom: 1px solid #ccc;
-    padding: 15px 10px;
-    margin-bottom: 45px;
-    margin-left: -2%;
+    width: 90%;
+    border-bottom: 1px solid #999;
+    margin: auto;
+    margin-bottom: 35px;
+    padding: 20px 0;
+
 }
 
 .shipping-details
@@ -2305,9 +2362,10 @@ input#txtEmail:focus {
     transition: all 0.6s ease;
 }
 
-.scrollchange  .top-header-right
+.scrollchange .navbar-social
 {
-    top: -70px;
+    margin-top: 47px;
+    transition: all 0.6s ease;
 }
 
 .scrollchange .top-header

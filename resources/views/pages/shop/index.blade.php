@@ -34,8 +34,6 @@
     <div class="shop-container"> 
         <div id="brandName" class="shop-brand-name">ALL</div>
 
-        <hr style="width:100%;margin:10px;">
-
         <div class="shop-category">                    
             <a id="cat0" href="{{ route('shop.index', ['category' => 'All','brand' => Session::get('brand_name')])}}">ALL</a>                
             <!-- LOAD ALL AVAILABEL PRODUCT TYPE -->

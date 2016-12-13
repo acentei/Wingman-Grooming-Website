@@ -58,33 +58,7 @@
                         </li>
                     </ul>
                 
-                    <ul class="nav navbar-nav navbar-right">   
-
-                        <div class="top-header-right">
-                            <div class="top-header-cart">
-                               <a href="{{route('cart.index')}}"> 
-                                   <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> CART ( <b id="cartCount">{{Cart::count()}}</b> )
-                                </a>
-                            </div>
-
-                            {!! Form::open([      
-                                'method' => 'GET',
-                                'url' => 'shop'
-                            ]) !!}
-
-                            <div class="top-header-search">
-                                <span class="glyphicon glyphicon-search" aria-hidden="true"></span><input id="search" name="search" type="text" placeholder="SEARCH STORE">
-                            </div>  
-
-
-                        {!! Form::close() !!}
-
-                    </div>
-
-                        <li><a id="facebook" target="_blank" href="https://www.facebook.com/wingmangrooming" title="Wingman Grooming on Facebook"><img src="{{ URL::asset('/images/icons/fb-icon.png') }}"></a></li>
-                        <li><a id="instagram" target="_blank" href="https://www.instagram.com/wingman_grooming" title="Wingman Grooming Instagram"><img src="{{ URL::asset('/images/icons/inst-icon.png') }}"></a></li>
-                        <li><a id="twitter" target="_blank" href="#" title="Wingman Grooming Twitter"><img src="{{ URL::asset('/images/icons/twit-icon.png') }}"></a></li>                    
-                    </ul>
+                    
                     
                 {{--
                 <!-- Right Side Of Navbar -->
