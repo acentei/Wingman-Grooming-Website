@@ -103,38 +103,43 @@
 @endif
 <!---end here -->
 
-<div class="voucher-container">
-    <label id="v-label" class="control-label" style="display:none;" for="voucher"></label>
-    <input id="input-vouch" type="text" name="voucher" placeholder="Enter Voucher Code"/>
-    <a id="btnVoucher" href="#">USE VOUCHER</a>
-</div>
-
-<div class="subtotal-container">
-    <div class="left">
-        Subtotal
-    </div>
-
-    <div class="right">
-        Php &nbsp;<span id="subtotal">{{Cart::subtotal()}}</span>
-    </div>
-</div>
-
-<div class="extra-container">
-    <div class="per-extra-container">
-        <div class="left">
-            Discount
-        </div>
-        <div class="right">
-           PHP 00.00
-        </div>
-    </div>
+<div class="after-cart-container">
     
-    <div class="per-extra-container">
-        <div class="left-sec">
-            Total
+    <div class="voucher-container">
+        <label id="v-label" class="control-label" style="display:none;" for="voucher"></label>
+        <input id="input-vouch" type="text" name="voucher" placeholder="Enter Voucher Code"/>
+        <a id="btnVoucher" href="#">USE VOUCHER</a>
+    </div>
+
+    <div class="money-container">
+        <div class="subtotal-container">
+            <div class="left">
+                Subtotal
+            </div>
+
+            <div class="right">
+                Php &nbsp;<span id="subtotal">{{Cart::subtotal()}}</span>
+            </div>
         </div>
-        <div class="right-sec">
-           PHP 00.00
+
+        <div class="extra-container">
+            <div class="per-extra-container">
+                <div class="left">
+                    Discount
+                </div>
+                <div class="right">
+                   PHP 00.00
+                </div>
+            </div>
+
+            <div class="per-extra-container">
+                <div class="left-sec">
+                    Total
+                </div>
+                <div class="right-sec">
+                   PHP 00.00
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -171,7 +176,7 @@
 </div>
 
 <div class="terms">
-    <input id="input-terms" type="checkbox" name="terms" value="1" required /> I agree to the terms and refund policy
+    <input id="input-terms" type="checkbox" name="terms" value="1" required /> I agree to the <a href="#">terms and refund policy</a>
 </div>
 
 <div class="cart-btn-container">
