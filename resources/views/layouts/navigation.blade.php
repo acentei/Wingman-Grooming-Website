@@ -98,12 +98,19 @@
         window.onhashchange = locationHashChanged; // listen for hash change event
         locationHashChanged(); // add the active class to the appropriate link on initial page load
 
+        var $isOpen = false;
+        
         function openNav() {
-            document.getElementById("mySidenav").style.width = "250px";
-        }
-
-        function closeNav() {
-            document.getElementById("mySidenav").style.width = "0";
+            if ($isOpen)
+                {
+                    document.getElementById("mySidenav").style.width = "0"; 
+                    $isOpen = false;
+                }
+            else
+                {
+                    document.getElementById("mySidenav").style.width = "250px";
+                    $isOpen = true;
+                }
         }
     </script>
 
