@@ -1658,6 +1658,7 @@ input#txtEmail:focus {
     position: relative;
     padding: 15px;
     border-radius: 5px;
+    padding-bottom: 30px;
 }
 
 .prod-details
@@ -2195,10 +2196,9 @@ input#txtEmail:focus {
 
 .per-extra-container > .right
 {
-    width: 70%;
+    width: auto;
     overflow: hidden;
     height: 30px;
-    float:right;
     text-transform: uppercase;
     text-align: center;
     line-height: 30px;
@@ -2207,10 +2207,9 @@ input#txtEmail:focus {
 
 .per-extra-container > .right-sec
 {
-    width: 70%;
+    width: auto;
     overflow: hidden;
     height: 60px;
-    float:right;
     text-transform: uppercase;
     text-align: center;
     line-height: 60px;
@@ -3168,6 +3167,7 @@ input#txtEmail:focus {
  {
     background-color: #000 !important;
     border-color: #000 !important;
+    color: #fff !important;
 }
 
 
