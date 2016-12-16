@@ -31,7 +31,7 @@
 @endsection
 
 @section('header')
-    <div id="myCarousel" class="carousel slide" data-ride="carousel"> 
+    <div id="myCarousel" class="carousel slide mobdet-product" data-ride="carousel"> 
       <!-- Indicators -->
       
       <ol class="carousel-indicators">
