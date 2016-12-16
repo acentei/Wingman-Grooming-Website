@@ -82,17 +82,4 @@
 
     {!! Form::close() !!}
 
-    <div class="quotes"> 
-        <div class="contact-note">
-            <p>
-                Please feel free to reach out to us at (Insert Email here) with all general inquiries.<br>
-                Call us at (Insert number here).
-            </p>
-        </div>    
-    </div>
-
-    <br><br><br>
-
-
-
 @endsection

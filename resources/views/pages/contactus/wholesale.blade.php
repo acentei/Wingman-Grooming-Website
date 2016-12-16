@@ -52,7 +52,7 @@
     ]) !!}
 
     <div class="contact-details">
-        <h4>Get in Touch</h4>
+        <h4>Wholesale Application</h4>
         
         <div class="full">
         *Full Legal Title and Trading Name
