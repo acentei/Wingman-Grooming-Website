@@ -30,6 +30,9 @@ class ShopController extends Controller
      */
     public function index()
     {   
+
+        $isSearch = '';
+
         //return dynamic values
         $brand = Brand::where('active',1)
                       ->where('deleted',0)
@@ -164,7 +167,8 @@ class ShopController extends Controller
         //                   ->paginate(12);      
         
 
-        return view('pages.shop.index',['brand' => $brand,'prodtype' => $type,'products' => $product,'now' => $this->dateNow, 'brandList' => $brandList ]);
+        return view('pages.shop.index',['brand' => $brand,'prodtype' => $type,'products' => $product,'now' => $this->dateNow, 
+                                        'brandList' => $brandList,'isSearch' => $isSearch,'search' => $search] );
     }
 
     /**

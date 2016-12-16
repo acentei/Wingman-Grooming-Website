@@ -50,7 +50,7 @@
                 <div class="form-group">   
                     <label for="title" class="col-sm-2 control-label">Title</label>    
                     <div class="col-sm-10">                              
-                        <input type="text" name="title" value="{{$caro->title}}" class="form-control" maxlength = "255" required />
+                        <input type="text" name="title" value="{{$caro->title}}" class="form-control" maxlength = "255" />
                     </div>       
                 </div>
 
@@ -80,14 +80,14 @@
                 <div class="form-group">   
                     <label for="title" class="col-sm-2 control-label">Button Label</label>    
                     <div class="col-sm-10">                              
-                        <input type="text" name="btn_lbl" value="{{$caro->button_label}}" class="form-control" maxlength = "255" required />
+                        <input type="text" name="btn_lbl" value="{{$caro->button_label}}" class="form-control" maxlength = "255" />
                     </div>       
                 </div>
 
                 <div class="form-group">   
                     <label for="title" class="col-sm-2 control-label">Link</label>    
                     <div class="col-sm-10">                              
-                        <input type="text" name="link" value="{{$caro->link}}" class="form-control" maxlength = "255" required />
+                        <input type="text" name="link" value="{{$caro->link}}" class="form-control" maxlength = "255" />
                     </div>       
                 </div>
                                 

@@ -46,12 +46,11 @@
 
         <hr style="width:100%;margin:10px;">
         
-        <!--- ADD IF  -->
+        @if($isSearch)
             <div class="shop-result">
-            "(<b>#</b>) result/s found for <u>NAME HERE</u>"
+                "(<b>{{count($products)}}</b>) result/s found for <u>{{$search}}</u>"
             </div>
-        
-       <!-- ELSE HERE -->
+        @endif       
 
         <div class="shop-listing">
             <div class="shop-left">
@@ -187,12 +186,12 @@
             var price = $(this).attr("data-price");
             var stock = $(this).attr("data-stock");
             
-            var input = $(this).attr("id").slice(-1);            
+            var input = $(this).attr("id").replace('btnAC','');             
             var qty = $('#numQty'+input).val();
 
             $(this).attr('data-quantity', qty);
 
-            console.log(id);
+            console.log('id: '+id);
 
             $.ajax({
                 type: "POST",

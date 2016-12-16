@@ -54,7 +54,10 @@
                         <div class="carousel-caption">
                             <h1><span>{{$caro->title}}</span></h1>
                             <p>{{$caro->description}}</p>
-                            <p><a class="btn wingman-btn" href="{{$caro->link}}" role="button">{{$caro->button_label}}</a></p>
+
+                            @if($caro->link)
+                                <p><a class="btn wingman-btn" href="{{$caro->link}}" role="button">{{$caro->button_label}}</a></p>
+                            @endif
                         </div>
                     </div>   
                 @else
@@ -64,7 +67,9 @@
                         <div class="carousel-caption">
                             <h1><span>{{$caro->title}}</span></h1>
                             <p>{{$caro->description}}</p>
-                            <p><a class="btn wingman-btn" href="{{$caro->link}}" role="button">{{$caro->button_label}}</a></p>
+                            @if($caro->link)
+                                <p><a class="btn wingman-btn" href="{{$caro->link}}" role="button">{{$caro->button_label}}</a></p>
+                            @endif
                         </div>
                     </div>   
                 @endif

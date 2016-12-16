@@ -160,22 +160,6 @@
                                 </div>
                             </div>
                         </div>
-
-                        <div id="related-product-4" class="shop-product-container">
-                            <div class="shop-product-image">
-                                <img src="http://placehold.it/190x190" width="190px" height="190px">
-                            </div>
-
-                            <div class="shop-product-details">
-                                <div class="prod-detail-name">
-                                    Water Based Pomade
-                                </div>
-
-                                <div class="prod-detail-price">
-                                    $18.00
-                                </div>
-                            </div>
-                        </div>
                         
                     </div>
                 </div>
@@ -254,7 +238,7 @@
           $(".details-properties").append('<div class="product-ingredients"><span font-family: BebasNeue;text-transform:uppercase; font-size: 18pt;>'+$jsonDetails[count]['name']+' : </span><span style="padding-top: 10px; font-weight:bold;font-size: 11pt; font-family: Gotham;">'+$jsonDetails[count]['value']+'</span><br>');
       } 
 
-      for(count = 0; count <= 3; count++)
+      for(count = 0; count <= 2; count++)
       {
           $pos = count+1;
           $(this).find('#related-product-'+($pos)).css("display","inline-block");
@@ -264,7 +248,7 @@
       $relatedProd = $(e.relatedTarget).attr('data-related');
       $jsonRelated = JSON.parse($relatedProd);
 
-      for(ctr = 0; ctr <= 3; ctr++)
+      for(ctr = 0; ctr <= 2; ctr++)
       {     
           $pos = ctr+1;
           if($jsonRelated[ctr])
