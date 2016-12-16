@@ -203,7 +203,7 @@
         
         $.ajax({
             type: "GET",
-            url: 'http://localhost:8080/wingmangrooming/public/index.php/webapi/cart/remove-discount',                
+            url: '/webapi/cart/remove-discount',                
             data: {
                           
             },  
@@ -244,7 +244,7 @@
 
         $.ajax({
             type: "POST",
-            url: 'webapi/cart/remove-item',                
+            url: '/webapi/cart/remove-item',                
             data: {
                 "id" : id,                
             },  
@@ -294,7 +294,7 @@
             {
                 $.ajax({
                     type: "POST",
-                    url: 'webapi/cart/update-item',                
+                    url: '/webapi/cart/update-item',                
                     data: {
                         "id" : id,                
                         "rowid" : rowid,                
@@ -393,7 +393,7 @@
 
         $.ajax({
             type: "GET",
-            url: 'webapi/cart/voucher-valid',                
+            url: '/webapi/cart/voucher-valid',                
             data: {
                 "voucher" : voucher,                
             },  

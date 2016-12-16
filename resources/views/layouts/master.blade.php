@@ -48,12 +48,12 @@
 
                 $.ajax({
                     type: "GET",
-                    url: 'http://localhost:8080/wingmangrooming/public/index.php/webapi/cart/remove-discount',                
+                    url: '/webapi/cart/remove-discount',                
                     data: {
                                   
                     },  
                     success: function(data) {
-                        console.log(data);  
+                        //console.log(data);  
                     },
                     error: function(xhr, status, error) {
                   
@@ -79,7 +79,7 @@
                     //get cart-count                                          
                     $.ajax({
                         type: "GET",
-                        url: 'http://localhost:8080/wingmangrooming/public/index.php/webapi/cart/cart-count',                
+                        url: '/webapi/cart/cart-count',                
                         data: {
                                         
                         },

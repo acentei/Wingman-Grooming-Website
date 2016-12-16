@@ -195,7 +195,7 @@
 
             $.ajax({
                 type: "POST",
-                url: 'webapi/cart/add-cart',                
+                url: '/webapi/cart/add-cart',                
                 data: {
                     "id" : id,
                     "code" : code,

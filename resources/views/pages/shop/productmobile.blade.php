@@ -177,7 +177,7 @@
 
         $.ajax({
             type: "POST",
-            url: 'http://localhost:8080/wingmangrooming/public/index.php/webapi/cart/add-cart',                
+            url: '/webapi/cart/add-cart',                
             data: {
                 "id" : id,
                 "code" : code,
