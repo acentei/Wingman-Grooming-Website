@@ -14,11 +14,57 @@ use Mail;
 use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Models\OrderInfo;
+use App\Models\Product;
 
 class PaypalController extends Controller
 {
     public function postPayment()
     {
+        $discountTotal = 0;
+        $discountMultiplier = 0;
+        $finalTotal = 0;
+        $total = str_replace(",", "", Cart::total());
+
+        //get data if there is discount active
+        if(Session::get('voucher-active') == 1)
+        {
+            if(Session::get('voucher-discount-type') == "Percent")
+            {
+                $discountMultiplier = Session::get('voucher-discount-value')/100;
+                $discountTotal = 0 - ($total*$discountMultiplier);
+                $finalTotal = $total + $discountTotal;
+
+                $existDiscount = Cart::search(function($key, $value) { return $key->name == 'Discount'; });
+                
+                if(count($existDiscount) == 0)
+                {
+                    $cartItem = Cart::add(Session::get('voucher-code'), 'Discount', 1, $discountTotal);
+                    Cart::setTax($cartItem->rowId,0);    
+
+                    Session::put('discount_rowid',$cartItem->rowId);
+                }  
+            }
+            else if(Session::get('voucher-discount-type') == "Amount")
+            {
+                $discountTotal = 0 - Session::get('voucher-discount-value');
+                $finalTotal = $total + $discountTotal;
+
+                $existDiscount = Cart::search(function($key, $value) { return $key->name == 'Discount'; });
+                
+                if(count($existDiscount) == 0)
+                {
+                    $cartItem = Cart::add(Session::get('voucher-code'), 'Discount', 1, $discountTotal);
+                    Cart::setTax($cartItem->rowId,0);    
+
+                    Session::put('discount_rowid',$cartItem->rowId);
+                }    
+            }
+        }
+        else
+        {
+            $finalTotal = $total;
+        }
+
         $items = array();
 
         foreach(Cart::content() as $item)
@@ -32,7 +78,7 @@ class PaypalController extends Controller
             'cancelUrl'=>'http://localhost:8080/wingmangrooming/public/index.php/payment/cancel_order',
             'returnUrl'=>'http://localhost:8080/wingmangrooming/public/index.php/payment/payment_success',
             'noshipping' => '1',
-            'amount' =>  str_replace(",", "", Cart::total()),
+            'amount' =>  $finalTotal,
             'currency' => 'PHP'
         );
 
@@ -147,6 +193,18 @@ class PaypalController extends Controller
                 $orderDetail->total = $itemParams[$key]['price'];               
 
                 $orderDetail->save();
+
+                //update stock
+                $updateStock = Product::find($itemParams[$key]['options']->id);
+                $updateStock->stocks = $updateStock->stocks - $itemParams[$key]['quantity'];
+
+                if(Session::get('voucher-one-time') == 1)
+                {
+                    $updateStock->is_one_time_use = 0;
+                    $updateStock->active = 0;
+                }
+
+                $updateStock->save();
             }   
 
             //SEND E-RECEIPT TO EMAIL
@@ -163,7 +221,7 @@ class PaypalController extends Controller
 
             if($orderParams['notes'])
             {
-                $data['notes'] => $orderParams['notes'];
+                $data['notes'] = $orderParams['notes'];
             }
 
             Mail::send('pages.emails.receipt-email', $data, function($message) use ($data)

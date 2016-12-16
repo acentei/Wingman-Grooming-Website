@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 
 use Cart;
 use App\Models\PromoCode;
+use Session;
 
 class CartWebapi extends Controller
 {    
@@ -39,9 +40,22 @@ class CartWebapi extends Controller
 
     public function postRemoveItem(Request $request)
     {
-    	Cart::remove($request->id);
+        Cart::remove($request->id);
 
-    	return Cart::content();
+        return Cart::content();        
+    }
+
+    public function getRemoveDiscount()
+    {
+        $discount = Session::get('discount_rowid');
+        
+        if($discount != '')
+        {  
+            Cart::remove($discount); 
+            Session::put('discount_rowid','');  
+        }	   
+
+        return Cart::content();    
     }
 
     public function postUpdateItem(Request $request)
@@ -62,19 +76,51 @@ class CartWebapi extends Controller
 
     public function getSubtotal(Request $request)
     {
-        
-
         return $stotal;
     }
 
     public function getVoucherValid(Request $request)
     {        
-        $promoCode = PromoCode::where('code',$request->voucher)                              
-                              ->where('active',1)
-                              ->where('deleted',0)
-                              ->first();
+        //check first durtation based promos
+        $durationPromo = PromoCode::where('code',$request->voucher)    
+                                  ->where('start_date','<=',date('Y-m-d'))                          
+                                  ->where('expiration_date','>=',date('Y-m-d'))                          
+                                  ->where('active',1)
+                                  ->where('deleted',0)
+                                  ->first();
 
-        return $promoCode;
-        
+        if(count($durationPromo) != 0)
+        {
+            Session::put('voucher-code',$durationPromo->code);
+            Session::put('voucher-discount-type',$durationPromo->discount_type);            
+            Session::put('voucher-discount-value',$durationPromo->discount_value);
+            Session::put('voucher-one-time',$durationPromo->is_one_time_use);
+            Session::put('voucher-active',1);
+
+            return $durationPromo;
+        }        
+        else
+        {
+            $oneTime = PromoCode::where('code',$request->voucher)                              
+                                ->where('is_one_time_use',1)
+                                ->where('active',1)
+                                ->where('deleted',0)
+                                ->first();
+
+            if(count($oneTime) != 0)
+            {
+                Session::put('voucher-code',$oneTime->code);
+                Session::put('voucher-discount-type',$oneTime->discount_type);
+                Session::put('voucher-discount-value',$oneTime->discount_value);
+                Session::put('voucher-one-time',$oneTime->is_one_time_use);
+                Session::put('voucher-active',1);
+
+                return $oneTime;
+            }
+            else
+            {
+                return '';
+            }
+        }
     }
 }

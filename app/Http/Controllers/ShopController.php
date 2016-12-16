@@ -35,6 +35,12 @@ class ShopController extends Controller
                       ->where('deleted',0)
                       ->orderBy('display_name','ASC')     
                       ->get();
+
+        $brandList = Brand::where('active',1)
+                      ->where('deleted',0)
+                      ->orderBy('display_name','ASC')     
+                      ->get()
+                      ->lists("display_name",'brand_id');
         
         $type = ProductType::where('active',1)
                            ->where('deleted',0)
@@ -92,7 +98,7 @@ class ShopController extends Controller
         }
 
 
-        $product = Product::with('property') 
+        $product = Product::with('property','brand.product') 
                           ->where(function($query) {
                                 $query->where('name','LIKE','%'.\Request::get('search').'%')
                                       ->orWhere('description','LIKE','%'.\Request::get('search').'%');
@@ -113,7 +119,6 @@ class ShopController extends Controller
                           ->where('deleted',0)
                           ->orderBy('created_date','DESC')                                       
                           ->paginate(12);
-
           
         //get product
         // $product = Product::with('property');   
@@ -159,7 +164,7 @@ class ShopController extends Controller
         //                   ->paginate(12);      
         
 
-        return view('pages.shop.index',['brand' => $brand,'prodtype' => $type,'products' => $product,'now' => $this->dateNow ]);
+        return view('pages.shop.index',['brand' => $brand,'prodtype' => $type,'products' => $product,'now' => $this->dateNow, 'brandList' => $brandList ]);
     }
 
     /**
@@ -191,7 +196,7 @@ class ShopController extends Controller
      */
     public function show($slug)
     {
-        $product = Product::with('brand','producttype','property')
+        $product = Product::with('brand','brand.product','producttype','property')
                           ->where('slug',$slug)
                           ->first();     
         

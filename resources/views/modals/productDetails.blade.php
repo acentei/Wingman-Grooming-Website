@@ -113,7 +113,55 @@
                     <span>RELATED ITEMS</span>
                     <div class="related-items">
                         
-                        <div class="shop-product-container">
+                        <div id="related-product-1" class="shop-product-container">
+                            <div class="shop-product-image">
+                                <img src="http://placehold.it/190x190" width="190px" height="190px">
+                            </div>
+
+                            <div class="shop-product-details">
+                                <div class="prod-detail-name">
+                                    Water Based Pomade
+                                </div>
+
+                                <div class="prod-detail-price">
+                                    $18.00
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="related-product-2" class="shop-product-container">
+                            <div class="shop-product-image">
+                                <img src="http://placehold.it/190x190" width="190px" height="190px">
+                            </div>
+
+                            <div class="shop-product-details">
+                                <div class="prod-detail-name">
+                                    Water Based Pomade
+                                </div>
+
+                                <div class="prod-detail-price">
+                                    $18.00
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="related-product-3" class="shop-product-container">
+                            <div class="shop-product-image">
+                                <img src="http://placehold.it/190x190" width="190px" height="190px">
+                            </div>
+
+                            <div class="shop-product-details">
+                                <div class="prod-detail-name">
+                                    Water Based Pomade
+                                </div>
+
+                                <div class="prod-detail-price">
+                                    $18.00
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="related-product-4" class="shop-product-container">
                             <div class="shop-product-image">
                                 <img src="http://placehold.it/190x190" width="190px" height="190px">
                             </div>
@@ -148,6 +196,9 @@
 
       $image = $(e.relatedTarget).attr('data-image1');
       $(this).find('.modal-product-image img').attr('src',$image);
+
+      $brandName = $(e.relatedTarget).attr('data-brandName');
+      $(this).find('.modal-shop-name').text($brandName);
         
       $image2 = $(e.relatedTarget).attr('data-image2');
       $(this).find('.modal-product-more-images img#photo2').attr('src',$image2);    
@@ -201,8 +252,43 @@
       for(count = 0; count < $jsonDetails.length; count++)
       {            
           $(".details-properties").append('<div class="product-ingredients"><span font-family: BebasNeue;text-transform:uppercase; font-size: 18pt;>'+$jsonDetails[count]['name']+' : </span><span style="padding-top: 10px; font-weight:bold;font-size: 11pt; font-family: Gotham;">'+$jsonDetails[count]['value']+'</span><br>');
-      }        
-      
+      } 
+
+      for(count = 0; count <= 3; count++)
+      {
+          $pos = count+1;
+          $(this).find('#related-product-'+($pos)).css("display","inline-block");
+      }
+
+      $prodId = $(e.relatedTarget).attr('data-id');
+      $relatedProd = $(e.relatedTarget).attr('data-related');
+      $jsonRelated = JSON.parse($relatedProd);
+
+      for(ctr = 0; ctr <= 3; ctr++)
+      {     
+          $pos = ctr+1;
+          if($jsonRelated[ctr])
+          {
+
+                console.log('TOTAL_ITEM_COUNT: '+$jsonRelated.length+'POS:'+ $pos +'; PROD_ID:'+$prodId+'; OTHER_PROD_ID:'+$jsonRelated[ctr]['product_id']);
+              if($jsonRelated[ctr]['product_id'] != $prodId)
+              {           
+                 $(this).find('#related-product-'+($pos)+' img').attr('src',$jsonRelated[ctr]['photo']);
+                 $(this).find('#related-product-'+($pos)+' .prod-detail-name').text($jsonRelated[ctr]['name']);
+                 $(this).find('#related-product-'+($pos)+' .prod-detail-price').text($jsonRelated[ctr]['price']);
+                 $(this).find('#related-product-'+($pos)).css("display","inline-block");
+              } 
+              else
+              {
+                 $(this).find('#related-product-'+$pos).css("display","none");
+              } 
+          } 
+          else
+          {
+             $(this).find('#related-product-'+$pos).css("display","none");
+          }              
+      }
+
       $href = $(e.relatedTarget).attr('data-href');      
       
     });
