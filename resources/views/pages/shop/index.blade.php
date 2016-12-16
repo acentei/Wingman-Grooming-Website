@@ -185,7 +185,7 @@
             var image = $(this).attr("data-image");
             var price = $(this).attr("data-price");
             var stock = $(this).attr("data-stock");
-            
+
             var input = $(this).attr("id").replace('btnAC','');             
             var qty = $('#numQty'+input).val();
 
@@ -206,7 +206,7 @@
                     "stock" : stock,
                 },  
                 success: function(data) {
-                    console.log(data);                         
+                    //console.log(data);                         
                 },
                 error: function(xhr, status, error) {
               

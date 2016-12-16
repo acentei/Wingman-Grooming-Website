@@ -206,7 +206,7 @@
                           
             },  
             success: function(data) {
-                console.log(data);  
+                //console.log(data);  
                 //input.val() == 'yes' ? window.location.reload(true) : input.val('yes');
             },
             error: function(xhr, status, error) {
@@ -273,7 +273,9 @@
         var id = $(this).attr("id");
         var rowid = $(this).attr("data-id");         
         var value = $(this).val();
+
         var discount = document.getElementById("voucher-discount-value").innerHTML;
+        discount = discount.replace(',', '').trim();
 
         var val = $.trim($(".itemQty").val())
 
@@ -299,23 +301,41 @@
                     datatype: 'json',
                     success: function(data) {
                         //console.log(data);
-                        console.log(discount);
 
                         document.getElementById("total"+rowid).innerHTML = data[0][rowid]["subtotal"].toLocaleString('en-US');
-                        document.getElementById("subtotal").innerHTML  = data[1];   
+                        document.getElementById("subtotal").innerHTML  = data[1];  
+                        total = data[1].replace(',', '').trim();
+                        active_discount_value = $.cookie('active_discount_value');                      
 
-                        if((data[0][rowid]["subtotal"]-discount) >= 0)   
-                        {
-                            document.getElementById("total-after-discount").innerHTML  = (data[0][rowid]["subtotal"]-discount).toFixed(2);
-                        }   
-                        else if((data[0][rowid]["subtotal"]-discount) < 0)
-                        {
-                            document.getElementById("total-after-discount").innerHTML  = "0.00";
+                        console.log(active_discount_value);
+                        if(active_discount_value)
+                        {    
+                            //update percent type discounts
+                            var discount_multiplier = active_discount_value/100;
+                            var discount_value = (total*discount_multiplier).toFixed(2);
+                            var newTotal = (total-discount_value).toFixed(2);
+
+                            document.getElementById("voucher-discount-value").innerHTML  = discount_value; 
                         }
                         
+                        //display updated
+                        if(discount != 0.00)
+                        {
+                            //console.log(data[1]+' '+discount);
+                            document.getElementById("total-after-discount").innerHTML  = (total-discount).toFixed(2);
+                        }  
+                        else
+                        {
+                            document.getElementById("total-after-discount").innerHTML = data[1];
+                        }
+
+                        if((data[0][rowid]["subtotal"]-discount) < 0)
+                        {
+                            document.getElementById("total-after-discount").innerHTML  = "0.00";
+                        }                                                
                     },
                     error: function(xhr, status, error) {
-                  
+                    window.setTimeout('location.reload(true)', 1000);
                     // So we remove everything before the first '{
                     var result = xhr.responseText.replace(/[^{]*/i,'');
                     console.log(result);
@@ -406,6 +426,8 @@
                         document.getElementById("total-after-discount").innerHTML  =  "0.00";
                     }
                     
+                    $.cookie('active_discount_value', data['discount_value']);
+
                 }
                 else if(data['discount_type'] == "Amount")
                 {
@@ -485,7 +507,11 @@
         {{Session::put('voucher-discount-value','')}}
         {{Session::put('voucher-one-time','')}}
         {{Session::put('voucher-active','')}}
+
+        $.cookie('active_discount_value','');
+        document.getElementById("voucher-discount-value").innerHTML = '0.00';
         
+        document.getElementById("total-after-discount").innerHTML = document.getElementById("subtotal").innerHTML;
     });
 
     
