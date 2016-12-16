@@ -6,11 +6,11 @@
 
 {{--META TAGS--}}
 @section('meta-url')
-	{{Request::url()}}
+    {{Request::url()}}
 @endsection
 
 @section('meta-title')
-	Shopping Cart | Wingman Grooming
+    Shopping Cart | Wingman Grooming
 @endsection
 
 @section('meta-description')
@@ -18,7 +18,7 @@
 @endsection
 
 @section('meta-image')
-	
+    
 @endsection
 
 {{-- STYLES AND SCRIPTS--}}
@@ -31,6 +31,8 @@
 @endsection
 
 @section('content')
+
+<input type="hidden" id="refresh" value="no">
 
 <div class="cart-main">Your Shopping Cart</div>
 
@@ -55,39 +57,38 @@
     'action' => 'PaypalController@postPayment',
 ]) !!}
 
-@if(count(Cart::content()) != 0)
+@if(Cart::count() != 0)
 
     @foreach(Cart::content() as $key => $item)
-
-        <div class="cart-item-container">
-            
-            <div class="the-cart">
-               
-                    <img src="{{$item->options->image}}" align="left" width="150px" height="150px">
+        @if($item->name != "Discount")        
+            <div class="cart-item-container">
                 
+                <div class="the-cart">
+                   
+                    <img src="{{$item->options->image}}" align="left" width="150px" height="150px">
+                    
 
-                {{$item->name}}
+                    {{$item->name}}
+                </div>
+                
+                <div class="the-cart">
+                    Php {{number_format($item->price)}}
+                </div>
+                
+                <!--DONT FORGET VALUE -->
+                <div class="the-cart">
+                    <input class="prh-num itemQty" id="input-qty" data-id="{{$item->rowId}}" type="number" name="qty" min = "1" max="{{$item->options->stock}}" value="{{$item->qty}}" />
+                </div>
+                
+                <div class="the-cart">
+                    Php&nbsp;<span id="total{{$key}}">{{number_format($item->total)}}</span>
+                         
+                    <a class="removeItem" href="1" data-id="{{$item->rowId}}">
+                        <div class="cart-cancel">x</div>
+                    </a>
+                </div>                
             </div>
-            
-            <div class="the-cart">
-                Php {{number_format($item->price)}}
-            </div>
-            
-            <!--DONT FORGET VALUE -->
-            <div class="the-cart">
-                <input class="prh-num itemQty" id="input-qty" data-id="{{$item->rowId}}" type="number" name="qty" min = "1" max="{{$item->options->stock}}" value="{{$item->qty}}" />
-            </div>
-            
-            <div class="the-cart">
-                Php&nbsp;<span id="total{{$key}}">{{number_format($item->total)}}</span>
-                     
-                <a class="removeItem" href="1" data-id="{{$item->rowId}}">
-                    <div class="cart-cancel">x</div>
-                </a>
-            </div>
-            
-        </div>
-
+        @endif
     @endforeach
 
 @else
@@ -102,12 +103,12 @@
 
 @endif
 <!---end here -->
-
 <div class="after-cart-container">
     
     <div class="voucher-container">
-        <label id="v-label" class="control-label" style="display:none;" for="voucher"></label>
-        <input id="input-vouch" type="text" name="voucher" placeholder="Voucher Code"/>
+        <label id="v-label" class="control-label" style="display:none;" for="voucher"></label><br>
+        <input id="input-vouch" type="text" name="voucher" placeholder="Enter Voucher Code"/><br>
+        <span id="v-help-b" style="display:none;" class="help-block"></span><br>
         <a id="btnVoucher" href="#">USE VOUCHER</a>
     </div>
 
@@ -128,7 +129,7 @@
                     Discount
                 </div>
                 <div class="right">
-                   PHP 00.00
+                   PHP <div style="display: inline;" id="voucher-discount-value">0.00</div>
                 </div>
             </div>
 
@@ -137,7 +138,7 @@
                     Total
                 </div>
                 <div class="right-sec">
-                   PHP 00.00
+                   PHP <div style="display: inline;" id="total-after-discount">{{Cart::subtotal()}}</div>
                 </div>
             </div>
         </div>
@@ -186,11 +187,52 @@
     
     <div>
         {{-- <a href="{{URL('payment/checkout')}}">Proceed to Checkout</a> --}}
-        <input id="button" type="submit" value="" class="paypal"/>        
+        @if(Cart::count() != 0)
+            <input id="button" type="submit" value="" class="paypal"/>  
+        @else
+            <input id="button" type="submit" value="" class="paypal btn-disabled" disabled/>
+        @endif      
     </div>
 </div>
 
 <script type="text/javascript"> 
+
+    $(document).ready(function() {        
+        
+        $.ajax({
+            type: "GET",
+            url: 'http://localhost:8080/wingmangrooming/public/index.php/webapi/cart/remove-discount',                
+            data: {
+                          
+            },  
+            success: function(data) {
+                console.log(data);  
+                //input.val() == 'yes' ? window.location.reload(true) : input.val('yes');
+            },
+            error: function(xhr, status, error) {
+          
+            if(xhr)
+            {
+                // So we remove everything before the first '{
+                var result = xhr.responseText.replace(/[^{]*/i,'');
+                console.log(result);
+
+                //We parse the json
+                var data = JSON.parse(result);
+              
+                $('#errorhere').html("<div class='alert alert-danger'></div>");
+                // And continue like no error ever happened
+                $.each(data, function(i,item){
+                        $('.alert-danger').append(item + "<br>");
+                    });
+                }
+            } 
+        });
+
+        var input = $('#refresh');
+        input.val() == 'yes' ? window.setTimeout('location.reload(true)', 1000) : input.val('yes');
+        
+    });
       
     $('.removeItem').click(function()            
     {
@@ -231,6 +273,7 @@
         var id = $(this).attr("id");
         var rowid = $(this).attr("data-id");         
         var value = $(this).val();
+        var discount = document.getElementById("voucher-discount-value").innerHTML;
 
         var val = $.trim($(".itemQty").val())
 
@@ -256,9 +299,20 @@
                     datatype: 'json',
                     success: function(data) {
                         //console.log(data);
+                        console.log(discount);
 
                         document.getElementById("total"+rowid).innerHTML = data[0][rowid]["subtotal"].toLocaleString('en-US');
-                        document.getElementById("subtotal").innerHTML  = data[1];
+                        document.getElementById("subtotal").innerHTML  = data[1];   
+
+                        if((data[0][rowid]["subtotal"]-discount) >= 0)   
+                        {
+                            document.getElementById("total-after-discount").innerHTML  = (data[0][rowid]["subtotal"]-discount).toFixed(2);
+                        }   
+                        else if((data[0][rowid]["subtotal"]-discount) < 0)
+                        {
+                            document.getElementById("total-after-discount").innerHTML  = "0.00";
+                        }
+                        
                     },
                     error: function(xhr, status, error) {
                   
@@ -322,16 +376,54 @@
                 "voucher" : voucher,                
             },  
             success: function(data) {
-                console.log(data);
 
                 var label = document.getElementById("v-label");
                 var helpBlock = document.getElementById("v-help-b");
                 var inputVouch = document.getElementById("input-vouch");
+                                 
+                var subtotal = '{{Cart::subtotal()}}'; //but a string, so convert it to number
+                subtotal = subtotal.replace(',', '').trim();
 
                 label.style.display = "inline-block";
                 helpBlock.style.display = "inline-block";
                 helpBlock.style.fontSize = "10pt";  
                 inputVouch.style.marginBottom = '-5px';
+
+                if(data['discount_type'] == "Percent")
+                {
+                    var discount_multiplier = data['discount_value']/100;
+                    var discount_value = (subtotal*discount_multiplier).toFixed(2);
+                    var newTotal = (subtotal-discount_value).toFixed(2);
+
+                    document.getElementById("voucher-discount-value").innerHTML  = discount_value;
+
+                    if(newTotal >= 0)
+                    {
+                        document.getElementById("total-after-discount").innerHTML  =  newTotal;
+                    }
+                    else if(newTotal < 0)
+                    {
+                        document.getElementById("total-after-discount").innerHTML  =  "0.00";
+                    }
+                    
+                }
+                else if(data['discount_type'] == "Amount")
+                {
+                    var discount_value = data['discount_value'].toFixed(2);
+                    var newTotal = (subtotal-discount_value).toFixed(2);
+
+                    document.getElementById("voucher-discount-value").innerHTML  =  discount_value;
+
+                    if(newTotal >= 0)
+                    {
+                        document.getElementById("total-after-discount").innerHTML  =  newTotal;
+                    }
+                    else if(newTotal < 0)
+                    {
+                        document.getElementById("total-after-discount").innerHTML  =  "0.00";
+                    }
+                }
+                
 
                 if(data.length != 0)
                 {     
@@ -339,7 +431,7 @@
                     label.innerHTML= 'VOUCHER VALID!';
                     
                     helpBlock.style.color = "#3c763d";  
-                    helpBlock.innerHTML = data[0]['description'];  
+                    helpBlock.innerHTML = data['description'];  
             
                     $('#input-vouch').addClass( 'vouch-success' );
                     $('#input-vouch').removeClass( 'vouch-error' );
@@ -374,7 +466,7 @@
     }); 
     
     //remove other class in voucher text box
-    $("#input-vouch").on('change keydown paste input', function(){  
+    $("#input-vouch").on('paste input', function(){  
 
         var label = document.getElementById("v-label");        
         var helpBlock = document.getElementById("v-help-b");
@@ -386,8 +478,17 @@
         inputVouch.style.marginBottom = '10px';
         label.style.display = "none";
         helpBlock.style.display = "none";
+
+        //clear session if anything character or word is changed
+        {{Session::put('voucher-code','')}}
+        {{Session::put('voucher-discount-type','')}}
+        {{Session::put('voucher-discount-value','')}}
+        {{Session::put('voucher-one-time','')}}
+        {{Session::put('voucher-active','')}}
+        
     });
-     
+
+    
 </script> 
 
 {!! Form::close() !!}

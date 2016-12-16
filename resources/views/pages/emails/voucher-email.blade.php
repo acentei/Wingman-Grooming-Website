@@ -58,7 +58,7 @@
 			{
 			    background-color: #ebebeb;
 			    margin: auto;
-			    padding: 25px 110px;
+			    padding: 25px 0px;
 			    font-size: 10pt;
 			    line-height: 26px;
 			    text-align: center;
@@ -98,8 +98,7 @@
 			    
 			    <div class="response-note">
 			        <p>
-			            Use {{$code}}.<br>
-			            {{$description}}<br>
+			            Use <b>{{$code}}</b> to <b>{{$description}}</b>.
 			        </p>
 			    </div>			    
 			</div>

@@ -2,7 +2,6 @@
 <html lang="en">
 
 	<head>
-
 		<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 
 		<style>
@@ -10,10 +9,11 @@
 			{
 				font-family: Open Sans;
 			}
-
+							
 			.content
 		    {
-		        background:#fff;		        
+		        background:#fff;
+		        /*font-family: 'Roboto-Regular,Helvetica,Arial,sans-serif';		        */
 		    }
 
 		    .response-container
@@ -34,6 +34,17 @@
 			    color:#000;
 			    text-align: center;
 			    margin: auto;
+			}
+
+			.response-title-sub
+			{
+			    color: #bb2229;
+			    text-transform: uppercase;
+			    text-align: center;
+			    /*font-family: Gotham;*/
+			    font-weight: bold;
+			    font-size: 10pt;
+			    letter-spacing: 2px;
 			}
 
 			.response-note, .response-receipt-note
@@ -80,21 +91,17 @@
 			    <div class="response-title">
 			        <img src="{{ URL::asset('/images/wg-logo.png') }}" width="100px" height="auto" alt="Wingman Grooming Logo">
 			    </div>
+
+			    <div class="response-title-sub">
+			       	Thank you for subscribing to our website.
+			    </div>
 			    
 			    <div class="response-note">
 			        <p>
-			            New content!<br>
-			            View the article and enjoy.<br>
-			            Thank you for subscribing!
+			        	Here is a promo code you can use in your next purchase.<br>
+			            Use <b>{{$code}}</b> to <b>{{$description}}</b>.
 			        </p>
-			    </div>
-			    
-			    <a href="{{$url}}">
-				    <div class="response-img-container">		    
-				        {{-- <img src="{{$image}}">		     --}}
-				        <img src="https://s-media-cache-ak0.pinimg.com/originals/e5/e7/24/e5e724ae24af119df4052b59eddcc7e5.jpg">
-				    </div>	
-				</a>	    
+			    </div>			    
 			</div>
 		</div>
 

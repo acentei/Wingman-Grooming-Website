@@ -23,6 +23,10 @@ Route::get('/subscribe/success', function () {
     return view('pages.responses.subscription');
 });
 
+Route::get('/subscribe/fail', function () {    
+    return view('pages.responses.subsc-exist');
+});
+
 Route::get('/inquiry/sent', function () {    
     return view('pages.responses.message');
 });
@@ -31,9 +35,9 @@ Route::get('/wholesale-inquiry/sent', function () {
     return view('pages.responses.wholesale');
 });
 
-Route::get('/receipt-email', function () {    
-    return view('pages.emails.receipt-email');
-});
+// Route::get('/receipt-email', function () {    
+//     return view('pages.emails.receipt-email');
+// });
 
 Route::resource('newsletter','NewsletterController');
 Route::resource('shop','ShopController');
@@ -60,10 +64,10 @@ Route::resource('inventory','InventoryController');
 Route::get('newsletter/{date}/{slug}', [
     'as' => 'newsletter-show', 'uses' => 'NewsletterController@show']);
 
-//Route::get('shop?category=All&brand=All','ShopController@index');
+Route::get('show-generate','PromoCodeController@showGenerate');
+Route::post('generate-code','PromoCodeController@generateCode');
 
 Route::post('subscribe','SubscribingController@subscribe');
-
 
 Route::controller('webapi/cart','webapi\CartWebapi');
 Route::controller('webapi/shop','webapi\ShopWebapi');

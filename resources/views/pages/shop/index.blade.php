@@ -62,7 +62,15 @@
                 <div class="shop-browse-list">
                     <a id="brand0" href="{{ route('shop.index', ['brand' => 'All','category' => Session::get('type_name')])}}">
                         <div class="browse-list-name">All</div>
-                    </a>
+                    </a>          
+
+                    <select class="mobdet-browse-list">
+                        <option value="All">ALL</option>
+                        
+                        @foreach($brand as $brands)
+                            <option value="{{$brands->display_name}}">{{$brands->display_name}}</option>
+                        @endforeach
+                    </select>
                     
                     <!-- LOAD ALL AVAILABEL PRODUCT TYPE -->
                     @foreach($brand as $brand)                    
@@ -103,8 +111,9 @@
                             @endif
 
                             <div class="shop-product-image">
+
                                 <img src="{{$product->photo}}" width="190px" height="190px">
-                                
+                                                               
                                 <div class="shop-product-hover">  
                                     <div class="prod-hover-top">
                                         <a href="#" class="shop-notmob" data-toggle = "modal" data-target = "#showProductDetails"  
@@ -112,8 +121,9 @@
                                             data-image3="{{$product->photo_3}}" data-image4="{{$product->photo_4}}"
                                             data-name="{{$product->name}}" data-price="{{$product->price}}" 
                                             data-description="{{$product->description}}" data-details="{{$product['property']}}"
+                                            data-related="{{$product['brand']['product']}}"
                                             data-id="{{$product->product_id}}" data-productcode="{{$product->product_code}}" 
-                                            data-stock="{{$product->stocks}}">
+                                            data-stock="{{$product->stocks}}" data-brandname="{{$product['brand']->display_name}}">
                                             
                                             <span class="glyphicon glyphicon-search" style="color: black;padding-left: 150px;"></span>
                                         </a>
@@ -121,7 +131,6 @@
                                         <a href="{{ route('shop.show',$product->slug) }}" class="shop-mob">
                                             <span class="glyphicon glyphicon-search" style="color: black;"></span>
                                         </a>
-
                                     </div>
                                     
                                     @if($product->stocks != 0)
@@ -181,7 +190,9 @@
             var input = $(this).attr("id").slice(-1);            
             var qty = $('#numQty'+input).val();
 
-            $('.addCart').attr('data-quantity', qty);
+            $(this).attr('data-quantity', qty);
+
+            console.log(id);
 
             $.ajax({
                 type: "POST",
@@ -213,7 +224,25 @@
                 });
             } 
             });
-        });    
+        });   
+    
+        $('.mobdet-browse-list').on('change',function()            
+        {
+            var brandName = $(this).val();
+            var cat = '{{Session::get("type_name")}}';
+
+            if(cat)
+            {
+                window.location = window.location.pathname+"?brand="+brandName+"&category="+cat;
+            }
+            else
+            {
+                window.location = window.location.pathname+"?brand="+brandName;
+            }
+            
+        });
+
+
 
         //setActive Category
         $(document).ready(function(){
@@ -244,6 +273,27 @@
 
         //setActive brand
         $(document).ready(function(){
+
+            //session
+            var active_brand = '{{Session::get("brand_name")}}';            
+            var decoded = $("<div/>").html(active_brand).text();
+
+            if(active_brand)
+            {
+                var brandName = document.getElementById('brandName'); 
+                brandName.innerHTML = active_brand;   
+
+                $(".mobdet-browse-list").val(decoded);
+            }
+            else
+            {
+                var brandName = document.getElementById('brandName'); 
+                brandName.innerHTML = 'All';
+
+                $(".mobdet-browse-list").val('All') ;
+            }
+
+            //cookie
             var brand_class = $.cookie('brand_class');
             var brand_id = $.cookie('brand_id');
 
@@ -259,6 +309,8 @@
             {
                 var toInactive = $('.shop-browse-list a#brand0').find('.browse-list-name');
                 toInactive.addClass('list-active');
+
+                {{Session::put("brand_name",'All')}};
             }
 
             $('.shop-browse-list a').click(function() {

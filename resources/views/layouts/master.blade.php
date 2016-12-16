@@ -44,18 +44,54 @@
 
         <script type="text/javascript">
             //update cart count
-            $(document).ready(
-                function() {
-                    setInterval(function() {
-                        $.ajax({
-                            type: "GET",
-                            url: 'webapi/cart/cart-count',                
+            $(document).ready(function() {
+
+                $.ajax({
+                    type: "GET",
+                    url: 'http://localhost:8080/wingmangrooming/public/index.php/webapi/cart/remove-discount',                
+                    data: {
+                                  
+                    },  
+                    success: function(data) {
+                        console.log(data);  
+                    },
+                    error: function(xhr, status, error) {
+                  
+                    if(xhr)
+                    {
+                        // So we remove everything before the first '{
+                        var result = xhr.responseText.replace(/[^{]*/i,'');
+                        console.log(result);
+
+                        //We parse the json
+                        var data = JSON.parse(result);
+                      
+                        $('#errorhere').html("<div class='alert alert-danger'></div>");
+                        // And continue like no error ever happened
+                        $.each(data, function(i,item){
+                                $('.alert-danger').append(item + "<br>");
+                            });
+                        }
+                    } 
+                });
+
+                setInterval(function() {  
+                    //get cart-count                                          
+                    $.ajax({
+                        type: "GET",
+                        url: 'http://localhost:8080/wingmangrooming/public/index.php/webapi/cart/cart-count',                
+                        data: {
+                                        
+                        },
+                        success: function(data) {
+                            document.getElementById("cartCount").innerHTML = data;
+                            document.getElementById("cartCountMob").innerHTML = data;
+
+                        },
+                        error: function(xhr, status, error) {
                             
-                            success: function(data) {
-                                document.getElementById("cartCount").innerHTML = data;
-                            },
-                            error: function(xhr, status, error) {
-                          
+                        if(xhr)
+                        {
                             // So we remove everything before the first '{
                             var result = xhr.responseText.replace(/[^{]*/i,'');
                             console.log(result);
@@ -65,11 +101,14 @@
                             $('#errorhere').html("<div class='alert alert-danger'></div>");
                             // And continue like no error ever happened
                             $.each(data, function(i,item){
-                                $('.alert-danger').append(item + "<br>");
-                            });
-                        } 
-                        });
-                    }, 500);
+                                    $('.alert-danger').append(item + "<br>");
+                                });
+                            }
+                        }                            
+
+                    });    
+                    
+                }, 500);
             });
             
             //navbar
@@ -143,7 +182,7 @@
 
             <div class="mob-cart">
                 <a href="{{route('cart.index')}}"> 
-                   CART ( <b id="cartCount">{{Cart::count()}}</b> )
+                   CART ( <b id="cartCountMob">{{Cart::count()}}</b> )
                 </a>
             </div>
         </div>

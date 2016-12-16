@@ -34,13 +34,30 @@ class PromoCodeController extends Controller
      */
     public function index()
     {
-        $promo = PromoCode::where('active',1)
+        $duration = PromoCode::where('active',1)
                           ->where('deleted',0) 
+                          ->where('is_one_time_use',0)
+                          ->where('is_subscriber_only',0)
+                          ->orderBy('expiration_date','DESC')
+                          ->get();
+
+        $subscriber = PromoCode::where('active',1)
+                          ->where('deleted',0) 
+                          ->where('is_subscriber_only',1)
+                          ->orderBy('created_date','DESC')
+                          ->get();
+
+        $special = PromoCode::where('active',1)
+                          ->where('deleted',0) 
+                          ->where('is_subscriber_only',0)
+                          ->where('is_one_time_use',1)
+                          ->orderBy('created_date','DESC')
                           ->get();
         
-        return view('pages.promocode.index',['promo' => $promo]);
+        return view('pages.promocode.index',['duration' => $duration,'subscriber' => $subscriber,'special' => $special]);
                         
-    }   
+    }  
+
     /**
      * Show the form for creating a new resource.
      *
@@ -49,6 +66,80 @@ class PromoCodeController extends Controller
     public function create()
     {
         return view('pages.promocode.create');
+    }
+
+    /**
+     *  show generate page
+     */
+    public function showGenerate()
+    {
+        return view('pages.promocode.generatecode.create');
+    }
+
+     /**
+     *  show generate page
+     */
+    public function generateCode(Request $request)
+    {
+        //get details of the subscribers that will receive mail
+        $subscribers = Subscriber::where('isSubscribing',1)
+                          ->lists("email");
+
+        foreach ($subscribers as $email) 
+        {
+            $promo = new PromoCode();
+
+            //generate a unique random code
+            do
+            {
+                $randCode = $request->base.mt_rand(0,999999);
+
+                $existOrder = PromoCode::where('code','=',$randCode)
+                                   ->where('active',1)
+                                   ->where('deleted',0)
+                                   ->get();
+            }            
+            while(count($existOrder) != 0 );
+
+            $promo->code = $randCode;            
+            $promo->description = $request->description;
+            $promo->discount_type = $request->discount_type;
+            $promo->is_one_time_use = 1;
+            $promo->is_subscriber_only = 1;
+
+            if($request->discount_type == "Percent")
+            {
+                $promo->discount_value = $request->discount_percent;
+            }
+            elseif($request->discount_type == "Amount")
+            {
+                $promo->discount_value = $request->discount_amt;
+            }
+
+            $promo->save();
+
+            //SEND PROMO CODE TO SUBSCRIBERS
+            $data = array(
+                            'code' => $randCode,
+                            'description' => $request->description,
+                            'email' => '',
+                        );
+
+            $emails = Subscriber::where('isSubscribing',1)
+                                ->lists("email");
+
+            
+            $data['email'] = $email;
+
+            Mail::send('pages.emails.voucher-email', $data, function($message) use ($data)
+            {
+                $message->subject('Wingman Grooming Promo Code');
+                $message->from('ecommerce.mark8@gmail.com', 'Wingman Grooming');
+                $message->to($data['email']);
+            });
+        }
+
+        return redirect()->route('promo-codes.index');
     }
 
     /**
@@ -206,10 +297,7 @@ class PromoCodeController extends Controller
     {
         $promo = PromoCode::find($id);
         
-        $promo->deleted = 1;
-        $promo->active = 0;
-                
-        $promo->save();
+        $promo->delete();
         
         return redirect()->route('promo-codes.index'); 
     }

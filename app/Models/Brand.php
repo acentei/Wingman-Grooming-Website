@@ -14,4 +14,9 @@ class Brand extends Model
                            'modified_by','modified_date','active','deleted'];
     
     protected $primaryKey = "brand_id";
+
+    public function product()
+    {
+        return $this->hasMany('App\Models\Product','brand_id','brand_id')->inRandomOrder()->take(8);
+    }
 }
