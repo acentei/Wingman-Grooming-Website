@@ -141,31 +141,31 @@
             </div>
             
             <div class="top-header-right">
-            <div class="top-header-cart">
-               <a href="{{route('cart.index')}}"> 
-                   <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> CART ( <b id="cartCount">{{Cart::count()}}</b> )
-                </a>
-            </div>
+                <div class="top-header-cart">
+                   <a href="{{route('cart.index')}}"> 
+                       <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> CART ( <b id="cartCount">{{Cart::count()}}</b> )
+                    </a>
+                </div>
 
-            {!! Form::open([      
-                'method' => 'GET',
-                'url' => 'shop'
-            ]) !!}
+                {!! Form::open([      
+                    'method' => 'GET',
+                    'url' => 'shop'
+                ]) !!}
 
-            <div class="top-header-search">
-                <span class="glyphicon glyphicon-search" aria-hidden="true"></span><input id="search" name="search" type="text" placeholder="SEARCH STORE">
-            </div>  
+                <div class="top-header-search">
+                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span><input id="search" name="search" type="text" placeholder="SEARCH STORE">
+                </div>  
 
 
-            {!! Form::close() !!}
+                {!! Form::close() !!}
 
-            <div class="navbar-social">
-                <a id="facebook" target="_blank" href="https://www.facebook.com/wingmangrooming" title="Wingman Grooming on Facebook"><img src="{{ URL::asset('/images/icons/fb-icon.png') }}"></a>
+                <div class="navbar-social">
+                    <a id="facebook" target="_blank" href="https://www.facebook.com/wingmangrooming" title="Wingman Grooming on Facebook"><img src="{{ URL::asset('/images/icons/fb-icon.png') }}"></a>
 
-                <a id="instagram" target="_blank" href="https://www.instagram.com/wingman_grooming" title="Wingman Grooming Instagram"><img src="{{ URL::asset('/images/icons/inst-icon.png') }}"></a>
+                    <a id="instagram" target="_blank" href="https://www.instagram.com/wingman_grooming" title="Wingman Grooming Instagram"><img src="{{ URL::asset('/images/icons/inst-icon.png') }}"></a>
 
-                <a id="twitter" target="_blank" href="#" title="Wingman Grooming Twitter"><img src="{{ URL::asset('/images/icons/twit-icon.png') }}"></a>
-            </div>
+                    <a id="twitter" target="_blank" href="#" title="Wingman Grooming Twitter"><img src="{{ URL::asset('/images/icons/twit-icon.png') }}"></a>
+                </div>
 
         </div>
             
@@ -188,7 +188,6 @@
         </div>
 
         <div id="mySidenav" class="sidenav">
-            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
             <a href="{{ url('/') }}">HOME</a>
             <a href="{{ route('about.index')}}">ABOUT</a>
             <a href="{{ route('newsletter.index') }}">NEWSLETTER</a>

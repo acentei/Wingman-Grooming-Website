@@ -44,22 +44,7 @@
                 <hr class="mobile-only">
             </div> 
             
-            {!! Form::open([      
-                'method' => 'GET',
-                'url' => 'newsletter'
-            ]) !!}
-
-            <div class="newsletter-header-right full-article-search">
-                <div class="newsletter-search">
-                    <div class="nl-search-border">
-                        <span class="glyphicon glyphicon-search nl-search" aria-hidden="true">
-                            <input id="txtSearch" name="search" type="text" placeholder="Search Newsletter"> 
-                        </span>              
-                    </div>
-                </div> 
-            </div>  
-
-            {!! Form::close() !!}  
+            
         </div>
         
         <div class="newsletter-article-body">   

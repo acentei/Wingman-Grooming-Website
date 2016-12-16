@@ -45,6 +45,13 @@
         </div>
 
         <hr style="width:100%;margin:10px;">
+        
+        <!--- ADD IF  -->
+            <div class="shop-result">
+            "(<b>#</b>) result/s found for <u>NAME HERE</u>"
+            </div>
+        
+       <!-- ELSE HERE -->
 
         <div class="shop-listing">
             <div class="shop-left">

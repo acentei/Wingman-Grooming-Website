@@ -35,11 +35,11 @@
         <div class="newsletter-header">
             <div class="newsletter-header-left">
                 <hr class="mobile-only">
-                <div class="newsletter-title">Wingman Grooming Newsletter</div>
+                <div class="newsletter-title">Newsletter</div>
                 
                 <div class="newsletter-details">
-                    <a href="{{ route('newsletter.index', ['category' => 'News'])}}">RECENT NEWS</a> &nbsp; | &nbsp; 
-                    <a href="{{ route('newsletter.index', ['category' => 'Blog'])}}">BLOG</a> &nbsp; | &nbsp;
+                    <a href="{{ route('newsletter.index', ['category' => 'News'])}}">RECENT NEWS</a> 
+                    <a href="{{ route('newsletter.index', ['category' => 'Blog'])}}">BLOG</a>
                     <a href="{{ route('newsletter.index', ['category' => 'Article'])}}">ARTICLES</a>
                 </div>
                 <hr class="mobile-only">
@@ -53,7 +53,6 @@
                 <div class="newsletter-header-right">
                     <div class="newsletter-search">
                         <div class="nl-search-border">
-                            <span class="glyphicon glyphicon-search nl-search" aria-hidden="true">
                                 <input id="txtSearch" name="search" type="text" placeholder="Search Newsletter"> 
                             </span>              
                         </div>

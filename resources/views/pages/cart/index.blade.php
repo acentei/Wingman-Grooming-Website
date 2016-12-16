@@ -103,41 +103,44 @@
 
 @endif
 <!---end here -->
-
-<div class="voucher-container">
-    <label id="v-label" class="control-label" style="display:none;" for="voucher"></label><br>
-    <input id="input-vouch" type="text" name="voucher" placeholder="Enter Voucher Code"/><br>
-    <span id="v-help-b" style="display:none;" class="help-block"></span><br>
-    <a id="btnVoucher" href="#">USE VOUCHER</a>
-</div>
-
-<div class="subtotal-container">
-    <div class="left">
-        Subtotal
-    </div>
-
-    <div class="right">
-        Php &nbsp;<span id="subtotal">{{Cart::subtotal()}}</span>
-    </div>
-</div>
-
-<div class="extra-container">
-    <div class="per-extra-container">
-        <div class="left">
-            Discount
-        </div>
-
-        <div class="right">
-           PHP <div style="display: inline;" id="voucher-discount-value">0.00</div>
-        </div>
-    </div>
+<div class="after-cart-container">
     
-    <div class="per-extra-container">
-        <div class="left-sec">
-            Total
+    <div class="voucher-container">
+        <label id="v-label" class="control-label" style="display:none;" for="voucher"></label><br>
+        <input id="input-vouch" type="text" name="voucher" placeholder="Enter Voucher Code"/><br>
+        <span id="v-help-b" style="display:none;" class="help-block"></span><br>
+        <a id="btnVoucher" href="#">USE VOUCHER</a>
+    </div>
+
+    <div class="money-container">
+        <div class="subtotal-container">
+            <div class="left">
+                Subtotal
+            </div>
+
+            <div class="right">
+                Php &nbsp;<span id="subtotal">{{Cart::subtotal()}}</span>
+            </div>
         </div>
-        <div class="right-sec">
-           PHP <div style="display: inline;" id="total-after-discount">{{Cart::subtotal()}}</div>
+
+        <div class="extra-container">
+            <div class="per-extra-container">
+                <div class="left">
+                    Discount
+                </div>
+                <div class="right">
+                   PHP <div style="display: inline;" id="voucher-discount-value">0.00</div>
+                </div>
+            </div>
+
+            <div class="per-extra-container">
+                <div class="left-sec">
+                    Total
+                </div>
+                <div class="right-sec">
+                   PHP <div style="display: inline;" id="total-after-discount">{{Cart::subtotal()}}</div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -174,7 +177,7 @@
 </div>
 
 <div class="terms">
-    <input id="input-terms" type="checkbox" name="terms" value="1" required /> I agree to the terms and refund policy
+    <input id="input-terms" type="checkbox" name="terms" value="1" required /> I agree to the <a href="#">terms and refund policy</a>
 </div>
 
 <div class="cart-btn-container">

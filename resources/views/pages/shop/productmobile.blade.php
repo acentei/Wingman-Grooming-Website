@@ -31,7 +31,7 @@
 @endsection
 
 @section('header')
-    <div id="myCarouse-Productl" class="carousel-product slide" data-ride="carousel"> 
+    <div id="myCarousel" class="carousel slide mobdet-product" data-ride="carousel"> 
       <!-- Indicators -->
       
       <ol class="carousel-indicators">
@@ -75,6 +75,7 @@
         @endif
 
       </div>
+        <a class="left carousel-control" href="#myCarousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a> <a class="right carousel-control" href="#myCarousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
     </div> 
 
 @endsection
