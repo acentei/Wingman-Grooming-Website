@@ -596,15 +596,15 @@ ul#slide-list{
 
 .ft-img-social li a
 {  
-    height: 30px;
-    width: 30px;
+    height: 40px;
+    width: 40px;
     padding: 2px 0px;
 }
 
 .foot-social img
 {
-    width:40px;
-    height:40px; 
+    width:30px;
+    height:30px; 
     border-radius: 20px;
 }
 
@@ -829,8 +829,7 @@ input#txtEmail:focus {
     font-size: 10pt;
     font-family: GothamBold;
     letter-spacing: 1.5px;
-    margin: 15px 0;  
-    height: 30px;
+    margin-top: 26px; 
     text-transform: uppercase;
 }
 
@@ -883,35 +882,39 @@ input#txtEmail:focus {
 .newsletter-header-left
 {
     width: 50%;
-    float: left;
+    margin: auto;
+    display: block;
+    text-align: center;
 }
 
 .newsletter-header-right
 {
-    width: 30%;
-    float: right;
+    width: 50%;
+    margin: auto;
+    display: block;
 }
 
 .newsletter-search
 {
-    width: 100%;
+    width: 60%;
     padding: 10px 0;
+    margin: auto;
 }
 
 .nl-search-border input
 {
     border: none;
-    font-size: 11pt;
-    height: 35px;
+    font-size: 10pt;
+    height: 20px;
     width: inherit;
     background: #f7f9fb;
+    text-transform: uppercase;
 }
 
 .nl-search-border
 {
     width: 100%;
-    height: 40px;
-    border: 2px solid #c5c5c5;
+    border: 1px solid #c5c5c5;
     border-radius: 3px;
     display: inline-block;
 }
@@ -987,13 +990,29 @@ input#txtEmail:focus {
     letter-spacing: 1pt;  
 }
 
-.newsletter-details, .newsletter-details a
+.newsletter-details
 {
-    color: #bb2229;
-    font-weight: bold;
-    font-size: 11pt;
-    letter-spacing: 2pt;
-    margin-top: -5px;
+    width: 100%;
+}
+
+ .newsletter-details a
+{
+    width: 20%;
+    padding: 0;
+    text-transform: uppercase;
+    font-size: 9pt;
+    color: #000;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.newsletter-details a:hover
+{
+    padding: 0;
+    text-transform: uppercase;
+    color: #fff;
+    background: #515151;
+    text-decoration: none;
 }
 
 .newsletter-img
@@ -1194,10 +1213,21 @@ input#txtEmail:focus {
 
 /*-------------------------------------*/
         /* SHOP PAGE CONTENT */
+
+.shop-result
+{
+    width: 100%;
+    display: block;
+    text-align: center;
+    text-transform: uppercase;
+}
+
 .shop-listing
 {
     display: flex;
 }
+
+.shop
 
 .shop-left
 {
@@ -1292,14 +1322,14 @@ input#txtEmail:focus {
     color: #fff;
     background: #515151;
     text-decoration: none;
-    font-weight: bold;
+    font-family: GothamBold;
 }
 
 .shop-category > .active
 {
     background: #515151;
     color: #fff;
-    font-weight: bold;    
+    font-family: GothamBold;    
     text-decoration: none;
 }
 
@@ -1352,7 +1382,8 @@ input#txtEmail:focus {
 
 .prod-detail-price
 {
-    font-weight: bold;
+    font-family: GothamBold;
+    text-transform: uppercase;
 }
 
 .new-prod
@@ -1727,6 +1758,7 @@ input#txtEmail:focus {
 {
     font-size: 14pt;
     margin-top: 5px;
+    text-transform: uppercase;
 }
 
 .details-right
