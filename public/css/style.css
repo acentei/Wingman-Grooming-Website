@@ -106,7 +106,8 @@ input[type=file]
 {
     margin-top: 0;
     padding-top: 20px;
-    font-family: BebasNeue;    
+    font-family: BebasNeue; 
+    color: #000;   
 }
 
 .h1-center
@@ -825,7 +826,7 @@ input#txtEmail:focus {
     font-size: 10pt;
     font-family: GothamBold;
     letter-spacing: 1.5px;
-    margin-top: 125px;
+    margin-top: 35px;
     text-transform: uppercase;
 }
 
@@ -877,7 +878,7 @@ input#txtEmail:focus {
 
 .newsletter-header-left
 {
-    width: 50%;
+    width: 75%;
     margin: auto;
     display: block;
     text-align: center;
@@ -905,6 +906,7 @@ input#txtEmail:focus {
     width: inherit;
     background: #f7f9fb;
     text-transform: uppercase;
+    text-align: center;
 }
 
 .nl-search-border
@@ -989,11 +991,12 @@ input#txtEmail:focus {
 .newsletter-details
 {
     width: 100%;
+    padding-top: 15px;
 }
 
  .newsletter-details a
 {
-    width: 20%;
+    width: 15%;
     padding: 0;
     text-transform: uppercase;
     font-size: 9pt;
@@ -1276,7 +1279,7 @@ input#txtEmail:focus {
 
 .list-active
 {
-    background: #515151;
+    background: #000;
     color: #fff;
     font-weight: bold;    
     text-decoration: none;
@@ -1322,7 +1325,7 @@ input#txtEmail:focus {
 
 .shop-category > .active
 {
-    background: #515151;
+    background: #000;
     color: #fff;
     font-family: GothamBold;    
     text-decoration: none;
@@ -1355,7 +1358,7 @@ input#txtEmail:focus {
 
 .shop-product-container
 {
-    width: 30%;
+    width:30%;
     display: inline-block;
     text-align: center;
     padding-top: 10px;
@@ -1385,11 +1388,24 @@ input#txtEmail:focus {
 {
     z-index: 2;
 }
-
-.shop-product-image
+.related-items > .shop-product-container
 {
-    width: 100%;
+    width: 120px;
+    height: 150px;
+}
+
+.related-items > .shop-product-image
+{
+    width: 120px;
+    height: 120px;
     position: relative;
+    overflow: hidden;
+}
+
+.related-items > .shop-product-image img
+{
+    width: 120px;
+    height: auto;
 }
 
 .shop-product-hover {
@@ -1460,7 +1476,13 @@ input#txtEmail:focus {
     border: 1px #515151 solid;
     padding-bottom: 5px;
     margin: auto;
-    width: 95%;
+    width: 78%;
+    margin-top: -2%;
+}
+
+.details-right > .prod-hover-details
+{
+    width: 87%;
 }
 
 .prh-num
@@ -1950,7 +1972,7 @@ input#txtEmail:focus {
     font-family: BebasNeue;
     font-size: 30pt;
     text-align: center;
-    padding: 50px 0 10px 0;
+    padding: 25px 0 10px 0;
     margin: auto;
     color: #000;
 }
@@ -2645,7 +2667,7 @@ input#txtEmail:focus {
     font-family: BebasNeue;
     text-align: center;
     color:#000;
-    padding-top: 40px;
+    padding-top: 25px;
 }
 
 .contact-details

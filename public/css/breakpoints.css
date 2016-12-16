@@ -1483,6 +1483,24 @@
     }   
 }
 
+@media screen and (min-width: 767px) and (max-width: 800px)
+{
+    .top-header-right 
+    {
+        right: -11% !important;
+        width: 160px !important;
+    }
+}
+
+@media screen and (min-width: 800px) and (max-width: 865px)
+{
+    .top-header-right 
+    {
+        right: -8% !important;
+        width: 160px !important;
+    }
+}
+
 @media screen and (min-width : 767px) and (max-width: 1066px)
 {
     /* header */
@@ -1873,7 +1891,6 @@
         text-align: center;
         text-align-last:center;
         color:#000;
-        text-transform: uppercase;
     }
     
     /* Visible in Mobile only */

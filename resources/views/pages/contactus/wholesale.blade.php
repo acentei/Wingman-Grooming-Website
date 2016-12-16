@@ -32,10 +32,14 @@
 
 @section('content')
 
+    <div class="mobile-only-title">
+        <hr class="mobile-only">
+            Wholesale
+        <hr class="mobile-only">
+    </div>
+
 <div class="contact-title">
-    <hr class="mobile-only">
         Wholesale inquiry
-    <hr class="mobile-only">
 </div>
 
     <div class="quotes"> 
