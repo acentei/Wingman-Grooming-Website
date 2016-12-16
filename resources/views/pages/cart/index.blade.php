@@ -107,8 +107,10 @@
     
     <div class="voucher-container">
         <label id="v-label" class="control-label" style="display:none;" for="voucher"></label><br>
-        <input id="input-vouch" type="text" name="voucher" placeholder="Enter Voucher Code"/><br>
-        <span id="v-help-b" style="display:none;" class="help-block"></span><br>
+
+        <input id="input-vouch" type="text" name="voucher" placeholder="Enter Voucher Code"/>
+        <span id="v-help-b" style="display:none;" class="help-block"></span>
+
         <a id="btnVoucher" href="#">USE VOUCHER</a>
     </div>
 
