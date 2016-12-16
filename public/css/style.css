@@ -202,7 +202,7 @@ input[type=file]
 {
     position: absolute;
     top: 25px;
-    right: 0;
+    right: 1%;
     text-align: left;
     font-size: 9pt;
     width: 180px;
@@ -583,7 +583,6 @@ ul#slide-list{
     list-style-type: none; 
      /*padding: 0 10px;*/
     text-align: center;
-    width: 50%;
     margin-top: 20px;
 }
 
@@ -3150,6 +3149,19 @@ input#txtEmail:focus {
 {
     width: 400px;
     height: auto;
+}
+
+/* PAGINATION */
+.pagination > .active > a, .pagination > .active > a:focus, .pagination > .active > a:hover, .pagination > .active > span, .pagination > .active > span:focus, .pagination > .active > span:hover
+ {
+    background-color: #000 !important;
+    border-color: #000 !important;
+}
+
+
+.pagination > li > a, .pagination > li > span
+ {
+    color: #000 !important;
 }
 
 
