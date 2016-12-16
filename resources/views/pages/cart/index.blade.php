@@ -180,7 +180,7 @@
 </div>
 
 <div class="terms">
-    <input id="input-terms" type="checkbox" name="terms" value="1" required /> I agree to the <a href="#">terms and refund policy</a>
+    <input id="input-terms" type="checkbox" name="terms" value="1" required /> I agree to the <a href="{{route('policy.index')}}">terms and refund policy</a>
 </div>
 
 <div class="cart-btn-container">

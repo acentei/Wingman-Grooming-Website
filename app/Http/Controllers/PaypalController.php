@@ -73,10 +73,10 @@ class PaypalController extends Controller
         }
 
         $params = array(
-            // 'cancelUrl'=>'http://www.wingmangrooming.com/payment/cancel_order',
-            // 'returnUrl'=>'http://www.wingmangrooming.com/payment/payment_success',
-            'cancelUrl'=>'http://localhost:8080/wingmangrooming/public/index.php/payment/cancel_order',
-            'returnUrl'=>'http://localhost:8080/wingmangrooming/public/index.php/payment/payment_success',
+            'cancelUrl'=>'http://www.wingmangrooming.com/payment/cancel_order',
+            'returnUrl'=>'http://www.wingmangrooming.com/payment/payment_success',
+            //'cancelUrl'=>'http://localhost:8080/wingmangrooming/public/index.php/payment/cancel_order',
+            //'returnUrl'=>'http://localhost:8080/wingmangrooming/public/index.php/payment/payment_success',
             'noshipping' => '1',
             'amount' =>  $finalTotal,
             'currency' => 'PHP'
@@ -185,26 +185,30 @@ class PaypalController extends Controller
 
             //---- create order details (Product) ----//
             foreach ($itemParams as $key => $item) {
-                $orderDetail = new OrderDetail();
 
-                $orderDetail->order_id = $order->order_id;
-                $orderDetail->product_id = $itemParams[$key]['options']->id;
-                $orderDetail->quantity = $itemParams[$key]['quantity'];
-                $orderDetail->total = $itemParams[$key]['price'];               
-
-                $orderDetail->save();
-
-                //update stock
-                $updateStock = Product::find($itemParams[$key]['options']->id);
-                $updateStock->stocks = $updateStock->stocks - $itemParams[$key]['quantity'];
-
-                if(Session::get('voucher-one-time') == 1)
+                if($itemParams[$key]['name'] != 'Discount')
                 {
-                    $updateStock->is_one_time_use = 0;
-                    $updateStock->active = 0;
-                }
+                    $orderDetail = new OrderDetail();
 
-                $updateStock->save();
+                    $orderDetail->order_id = $order->order_id;
+                    $orderDetail->product_id = $itemParams[$key]['options']->id;
+                    $orderDetail->quantity = $itemParams[$key]['quantity'];
+                    $orderDetail->total = $itemParams[$key]['price'];               
+
+                    $orderDetail->save();
+
+                    //update stock
+                    $updateStock = Product::find($itemParams[$key]['options']->id);
+                    $updateStock->stocks = $updateStock->stocks - $itemParams[$key]['quantity'];
+
+                    if(Session::get('voucher-one-time') == 1)
+                    {
+                        $updateStock->is_one_time_use = 0;
+                        $updateStock->active = 0;
+                    }
+
+                    $updateStock->save();
+                }
             }   
 
             //SEND E-RECEIPT TO EMAIL
@@ -215,13 +219,18 @@ class PaypalController extends Controller
                             'email' => $orderParams['email'],
                             'date' => date("D M j,Y h:i:sa T"),
                             'code' => $randCode,
-                            'voucher' => 'none yet',
+                            'voucher' => '',
                             'notes' => '',
                     );
 
             if($orderParams['notes'])
             {
                 $data['notes'] = $orderParams['notes'];
+            }
+
+            if($orderParams['voucher'])
+            {
+                $data['voucher'] = $orderParams['voucher'];
             }
 
             Mail::send('pages.emails.receipt-email', $data, function($message) use ($data)
