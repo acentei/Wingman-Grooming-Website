@@ -199,7 +199,7 @@ class PaypalController extends Controller
 
                     //update stock
                     $updateStock = Product::find($itemParams[$key]['options']->id);
-                    $updateStock->stocks = $updateStock->stocks - $itemParams[$key]['quantity'];
+                    $updateStock->decrement('stocks',$itemParams[$key]['quantity']);
 
                     if(Session::get('voucher-one-time') == 1)
                     {
@@ -249,7 +249,12 @@ class PaypalController extends Controller
 
             Cart::destroy();
 
-
+            Session::put('discount_rowid','');
+            Session::put('voucher-code','');
+            Session::put('voucher-discount-type','');
+            Session::put('voucher-discount-value','');
+            Session::put('voucher-one-time','');
+            Session::put('voucher-active','');
 
             return redirect()->to('/order/success');
 

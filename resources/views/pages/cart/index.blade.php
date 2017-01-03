@@ -108,11 +108,12 @@
     <div class="voucher-container">
         <label id="v-label" class="control-label" style="display:none;" for="voucher"></label><br>
 
-        <input id="input-vouch" type="text" name="voucher" placeholder="Enter Voucher Code"/>
-
         <span id="v-help-b" style="display:none;" class="help-block"></span>
-
-        <a id="btnVoucher" href="#">USE VOUCHER</a>
+        
+        <div>
+            <input id="input-vouch" type="text" name="voucher" placeholder="Enter Voucher Code"/>
+            <a id="btnVoucher" href="#">USE VOUCHER</a>
+        </div>
     </div>
 
     <div class="money-container">
@@ -399,7 +400,7 @@
                 "voucher" : voucher,                
             },  
             success: function(data) {
-
+                var buttonVoucher = document.getElementById("btnVoucher");
                 var label = document.getElementById("v-label");
                 var helpBlock = document.getElementById("v-help-b");
                 var inputVouch = document.getElementById("input-vouch");
@@ -407,6 +408,7 @@
                 var subtotal = '{{Cart::subtotal()}}'; //but a string, so convert it to number
                 subtotal = subtotal.replace(',', '').trim();
 
+                buttonVoucher.style.display = "none";
                 label.style.display = "inline-block";
                 helpBlock.style.display = "inline-block";
                 helpBlock.style.fontSize = "10pt";  
@@ -434,7 +436,7 @@
                 }
                 else if(data['discount_type'] == "Amount")
                 {
-                    var discount_value = data['discount_value'].toFixed(2);
+                    var discount_value = data['discount_value'];
                     var newTotal = (subtotal-discount_value).toFixed(2);
 
                     document.getElementById("voucher-discount-value").innerHTML  =  discount_value;
@@ -515,6 +517,9 @@
         document.getElementById("voucher-discount-value").innerHTML = '0.00';
         
         document.getElementById("total-after-discount").innerHTML = document.getElementById("subtotal").innerHTML;
+
+        var buttonVoucher = document.getElementById("btnVoucher");
+        buttonVoucher.style.display = "inline-block";
     });
 
     

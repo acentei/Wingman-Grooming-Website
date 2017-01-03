@@ -671,7 +671,7 @@
 				            </div>
 				            
 				            <div class="the-cart">
-				                {{number_format($item['subtotal'])}}				                 
+				                {{number_format($item['total'])}}				                 
 				            </div>
 				            
 				        </div>
