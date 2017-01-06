@@ -15,6 +15,7 @@
                         <li><a href="{{route('order.index')}}">Orders</a></li>   
                         <li><a href="{{route('sales.index')}}">Sales</a></li>   
                         <li><a href="{{route('inventory.index')}}">Inventory</a></li>   
+                        <li><a href="{{route('shipping-cost.index')}}">Shipping Cost</a></li>   
                         <li class="divider"></li>
                         <li><a href="{{ url('auth/logout') }}"><i class="fa fa-btn fa-sign-out"></i> Logout</a></li>
 

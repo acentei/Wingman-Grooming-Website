@@ -8,6 +8,8 @@ use App\Http\Requests;
 
 use App\Models\ShippingDetails;
 
+use Auth;
+
 class ShippingDetailsController extends Controller
 {
     /**
