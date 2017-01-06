@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
+use App\Models\ShippingDetails;
+
 class CartController extends Controller
 {
     /**
@@ -15,7 +17,9 @@ class CartController extends Controller
      */
     public function index()
     {
-        return view('pages.cart.index');
+        $shipcost = ShippingDetails::get();
+
+        return view('pages.cart.index',['shipcost' => $shipcost[0]]);
     }
 
     /**

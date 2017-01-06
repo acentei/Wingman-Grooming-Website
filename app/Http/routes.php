@@ -59,6 +59,7 @@ Route::resource('carousel','CarouselController');
 Route::resource('order','OrderController');
 Route::resource('sales','SalesController');
 Route::resource('inventory','InventoryController');
+Route::resource('shipping-cost','ShippingDetailsController');
 
 /* CUSTOM CONTROLLERS */
 Route::get('newsletter/{date}/{slug}', [

@@ -490,7 +490,7 @@ ul#slide-list{
 {    
     font-size:8pt;        
     width: 100%;
-    margin-top: 20px;
+    margin-top: 40px;
 }
 
 .footer-container
@@ -1389,10 +1389,11 @@ input#txtEmail:focus {
 {
     z-index: 2;
 }
+
 .related-items > .shop-product-container
 {
-    width: 120px;
-    height: 150px;
+    width: 32%;
+    /*height: 150px;*/
 }
 
 .related-items > .shop-product-image
@@ -1477,8 +1478,8 @@ input#txtEmail:focus {
     border: 1px #515151 solid;
     padding-bottom: 5px;
     margin: auto;
-    width: 78%;
-    margin-top: -2%;
+    width: 80%;
+    margin-top: -3%;
 }
 
 .details-right > .prod-hover-details
@@ -1824,6 +1825,23 @@ input#txtEmail:focus {
     font-size: 10pt;
     line-height: 16px;
     text-align: justify;
+    white-space: pre-wrap;
+    word-break: normal;
+    border: none;
+    font-family: Gotham;
+    padding: 0;
+}
+
+.prodshow-pre
+{
+    padding-top: 3px;
+    font-size: 14pt;
+    white-space: pre-wrap;
+    word-break: normal;    
+    font-family: Gotham;
+    border: none;
+    padding: 0;
+    background-color: #fff;
 }
 
 .product-ingredients
@@ -2287,6 +2305,15 @@ input#txtEmail:focus {
 #input-detail-address
 {
     width:80%;
+    display: inline-block;
+    padding-left: 5px;
+    margin-right: 6px;
+}
+
+.input-region
+{
+    width: 100%;
+    height: 25px;
     display: inline-block;
     padding-left: 5px;
     margin-right: 6px;

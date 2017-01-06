@@ -1722,10 +1722,10 @@
     .nl-article-box
     {
         margin-top: 0;
-        margin-left: 16px;
-        margin-right: 16px;
+        /*margin-left: 16px;
+        margin-right: 16px;*/
         margin-bottom: 20px;
-        width: 45%;
+        /*width: 45%;*/
     }
 
     .nl-article-img
@@ -1735,14 +1735,38 @@
 
     .prod-hover-details
     {
-        width: 95%;
-        margin-top: 2%;
+        width: 80%;
+        margin-top: -3%;
     }
 
     .prod-hover-top
     {
         margin: 0 auto 48% 1px;
     }
+
+    .ft-box-button input#btnSubscribe {
+        background: #232323;
+        border: 1px solid #fff;
+        margin-top: 7px;
+        min-width: 100%;
+        float: left;
+        border-radius: 3px;
+        text-align: center;
+        font-size: 10pt;
+    }
+
+    .foot-subscribe {
+        padding-top: 10px;
+        padding-left: 20px;
+        margin: auto;
+        display: block;
+        width: 80%;
+    }
+
+    .ft-box {
+        min-width: 100%;
+    }
+    
 }
 
 @media screen and (min-device-width : 1439px) and (max-device-width : 2098px) 

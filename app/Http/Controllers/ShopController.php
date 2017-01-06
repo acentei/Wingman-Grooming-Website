@@ -101,7 +101,7 @@ class ShopController extends Controller
         }
 
 
-        $product = Product::with('property','brand.product') 
+        $product = Product::with('property','brand.product','brand.product.property') 
                           ->where(function($query) {
                                 $query->where('name','LIKE','%'.\Request::get('search').'%')
                                       ->orWhere('description','LIKE','%'.\Request::get('search').'%');
@@ -120,7 +120,7 @@ class ShopController extends Controller
                             })
                           ->where('active',1)
                           ->where('deleted',0)
-                          ->orderBy('created_date','DESC')                                       
+                          ->orderBy('name','ASC')                                       
                           ->paginate(12);
           
         //get product

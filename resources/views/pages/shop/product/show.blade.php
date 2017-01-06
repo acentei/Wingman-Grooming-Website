@@ -139,7 +139,7 @@
                 <div class="form-group">   
                     <label for="title" class="col-sm-2 control-label">Description</label>    
                     <div class="shop-show-col col-sm-10">                              
-                        <p>{{$product->description}}</p>
+                        <pre class="prodshow-pre">{{$product->description}}</pre>
                     </div>       
                 </div>
                                 

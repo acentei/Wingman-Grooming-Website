@@ -60,7 +60,7 @@
 @if(Cart::count() != 0)
 
     @foreach(Cart::content() as $key => $item)
-        @if($item->name != "Discount")        
+        @if(($item->name != "Discount" ) &&  ($item->name != "Shipping" ))
             <div class="cart-item-container">
                 
                 <div class="the-cart">
@@ -83,7 +83,7 @@
                 <div class="the-cart">
                     Php&nbsp;<span id="total{{$key}}">{{number_format($item->total)}}</span>
                          
-                    <a class="removeItem" href="1" data-id="{{$item->rowId}}">
+                    <a class="removeItem" href="" data-id="{{$item->rowId}}">
                         <div class="cart-cancel">x</div>
                     </a>
                 </div>                
@@ -156,6 +156,10 @@
 <div class="shipping-details">
 
     <h5>shipping details</h5>
+    <br>
+    <div class="full">
+        <b>*</b><i>Free Shipping for purchases worth of </i><b><i>PHP {{$shipcost->ship_nocost}} or above</i></b>.<br>    
+    </div>
 
     <div class="full">
         <b>*</b>Full Name
@@ -169,6 +173,22 @@
     </div>
 
     <div class="full">
+        <b>*</b>Region<br>
+        <select name="region" class="input-region">
+            <option value="manila">Metro Manila (PHP {{$shipcost->manila_cost}} Shipping Fee)</option>
+            <option value="out-manila">Outside Metro Manila (PHP {{$shipcost->outmanila_cost}} Shipping Fee)</option>
+        </select>
+        
+    </div>
+
+    <div class="full">
+        <b>*</b>Delivery Options<br>    
+        <input type="radio" name="delivery" value="standard" checked> Standard Delivery (No Additional Cost)
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <input type="radio" name="delivery" value="express"> Express Delivery (Add PHP {{$shipcost->express_shipping}})<br>
+    </div>
+
+    <div class="full">
         <b>*</b>Email / Phone Number<br>
         <input id="input-detail-email" type="text" placeholder="E-mail" name="email" required/>
         <input id="input-detail-number" type="text" placeholder="Phone Number" name="phonenumber" required/>
@@ -178,6 +198,7 @@
         Notes / Special Instructions
         <input id="input-detail-note" type="text" name="notes" />
     </div>
+    
 </div>
 
 <div class="terms">
@@ -206,6 +227,7 @@
         $.ajax({
             type: "GET",
             url: '/webapi/cart/remove-discount',                
+            //url: 'http://localhost:8080/wingmangrooming/public/index.php/webapi/cart/remove-discount',                
             data: {
                           
             },  
@@ -234,7 +256,8 @@
         });
 
         var input = $('#refresh');
-        input.val() == 'yes' ? window.setTimeout('location.reload(true)', 1000) : input.val('yes');
+        //input.val() == 'yes' ? window.setTimeout('location.reload(true)', 500) : input.val('yes');
+        input.val() == 'yes' ? window.setTimeout(window.location.replace("{{route('shop.index')}}"), 500) : input.val('yes');
         
     });
       
@@ -247,6 +270,7 @@
         $.ajax({
             type: "POST",
             url: '/webapi/cart/remove-item',                
+            //url: 'http://localhost:8080/wingmangrooming/public/index.php/webapi/cart/remove-item',                
             data: {
                 "id" : id,                
             },  
@@ -296,6 +320,7 @@
             {
                 $.ajax({
                     type: "POST",
+                    //url: 'http://localhost:8080/wingmangrooming/public/index.php/webapi/cart/update-item',                
                     url: '/webapi/cart/update-item',                
                     data: {
                         "id" : id,                

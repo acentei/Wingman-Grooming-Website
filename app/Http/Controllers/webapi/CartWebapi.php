@@ -48,12 +48,20 @@ class CartWebapi extends Controller
     public function getRemoveDiscount()
     {
         $discount = Session::get('discount_rowid');
+        $shipping = Session::get('shipping_id');
         
         if($discount != '')
         {  
             Cart::remove($discount); 
             Session::put('discount_rowid','');  
         }	   
+
+        //remove shipping
+        if($shipping != '')
+        {
+            Cart::remove($shipping); 
+            Session::put('shipping_id','');
+        }
 
         return Cart::content();    
     }

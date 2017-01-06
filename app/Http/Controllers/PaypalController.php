@@ -15,6 +15,7 @@ use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Models\OrderInfo;
 use App\Models\Product;
+use App\Models\ShippingDetails;
 
 class PaypalController extends Controller
 {
@@ -22,8 +23,55 @@ class PaypalController extends Controller
     {
         $discountTotal = 0;
         $discountMultiplier = 0;
-        $finalTotal = 0;
+        $finalTotal = 0;        
+
+        $order = \Request::all();
+
+        $shipcost = ShippingDetails::get();          
+
+        if(str_replace(",", "", Cart::total()) < $shipcost[0]->ship_nocost)
+        {
+            $shipTotal = 0;
+
+            if($order['delivery'] == "express")
+            {
+                $shipTotal = $shipTotal + $shipcost[0]->express_shipping;
+            }
+
+            //add shipping cost depending on the region
+            if($order['region'] == "manila")
+            {
+                $shipTotal = $shipTotal + $shipcost[0]->manila_cost;
+
+                $cartItem = Cart::add('ship00001', 'Shipping', 1, $shipTotal);
+                Cart::setTax($cartItem->rowId,0);
+
+                Session::put('shipping_id',$cartItem->rowId);
+
+                //$finalTotal = $total + 100;
+            }
+            else if ($order['region'] == "out-manila") 
+            {
+                $shipTotal = $shipTotal + $shipcost[0]->outmanila_cost;
+                
+                $cartItem = Cart::add('ship00002', 'Shipping', 1, $shipTotal);
+                Cart::setTax($cartItem->rowId,0);
+
+                Session::put('shipping_id',$cartItem->rowId);
+
+                //$finalTotal = $total + 200;
+            }            
+        }
+        else
+        {
+            $cartItem = Cart::add('ship00000', 'Shipping', 1, 0);
+            Cart::setTax($cartItem->rowId,0);
+
+            Session::put('shipping_id',$cartItem->rowId);
+        }
+
         $total = str_replace(",", "", Cart::total());
+        
 
         //get data if there is discount active
         if(Session::get('voucher-active') == 1)
@@ -81,8 +129,6 @@ class PaypalController extends Controller
             'amount' =>  $finalTotal,
             'currency' => 'PHP'
         );
-
-        $order = \Request::all();
 
         Session::put('params', $params);
         Session::put('order', $order);

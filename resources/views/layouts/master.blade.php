@@ -39,6 +39,9 @@
         {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
         <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+
+        {{-- elevated zoom --}}
+        <script src="{!! asset('/elevatedzoom/jquery.elevatezoom.js') !!}"></script>
         
         @yield('scripts')
 
@@ -49,6 +52,7 @@
                 $.ajax({
                     type: "GET",
                     url: '/webapi/cart/remove-discount',                
+                    //url: 'http://localhost:8080/wingmangrooming/public/index.php/webapi/cart/remove-discount',                
                     data: {
                                   
                     },  
@@ -80,6 +84,7 @@
                     $.ajax({
                         type: "GET",
                         url: '/webapi/cart/cart-count',                
+                        //url: 'http://localhost:8080/wingmangrooming/public/index.php/webapi/cart/cart-count',                
                         data: {
                                         
                         },
@@ -108,7 +113,7 @@
 
                     });    
                     
-                }, 500);
+                }, 1000);
             });
             
             //navbar
