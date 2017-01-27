@@ -139,9 +139,10 @@
     <body>
         <div id="topbar">
             <div class="top-header">
-
                 <div class="top-header-logo">
-                    <img src="{{ URL::asset('/images/wg-logo.png') }}">
+                    <a href="{{ url('/') }}">
+                        <img src="{{ URL::asset('/images/wg-logo.png') }}">
+                    </a>
                 </div>
             </div>
             

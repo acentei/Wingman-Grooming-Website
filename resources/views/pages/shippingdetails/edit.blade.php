@@ -68,7 +68,7 @@
                 </div>
 
                 <div class="form-group">   
-                    <label for="title" class="col-sm-4 control-label">Free Shipping</label>    
+                    <label for="title" class="col-sm-4 control-label">Express Shipping</label>    
                     <div class="col-sm-3">                              
                         <input type="number" name="express_shipping" value="{{$shipdet->express_shipping}}" class="form-control" min="0" required />
                     </div>       

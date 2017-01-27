@@ -138,17 +138,25 @@
             <span>RELATED ITEMS</span>
 
             <div class="mobdet-related-holder">
+                <?php $i=0; ?>
+
                 @foreach($product['brand']['product'] as $related)  
                     @if($related->product_id != $product->product_id)
-                        <div class="mobdet-related-image">
-                            <img src="{{$related->photo}}">
-                        </div>
+                        @if($i < 3)
+                            <?php $i++; ?>
+                            <a href="{{ route('shop.show',$related->slug) }}">
+                                <div class="mobdet-related-image">
+                                    <img src="{{$related->photo}}">
+                                </div>
+                            </a>
 
-                        <div class="mobdet-related-details">
-                            {{$related->name}}
-                            <br>
-                            {{$related->price}}
-                        </div>
+                            <div class="mobdet-related-details">
+                                {{$related->name}}
+                                <br>
+                                {{$related->price}}
+                            </div>
+                            <br><br>
+                        @endif
                     @endif
                 @endforeach
             </div>
