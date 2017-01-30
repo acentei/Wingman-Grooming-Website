@@ -445,16 +445,14 @@ ul#slide-list{
 {
     float: left;
     width: 33%;
-    padding: 0; 
-     
+    padding: 0;    
 }
 
 .ft-mid-column
 {
-    text-align: center;
     border-left:1px solid #a7a4a4;
     border-right:1px solid #a7a4a4;      
-    padding: 0px 0px;
+    padding: 0px 10px;
 }
 
 .footer-column-section
@@ -465,23 +463,15 @@ ul#slide-list{
     padding: 0;
 }
 
-.footer-column-each
-{
-    width: 90%;
-    padding: 0;
-    margin: auto;
-    text-align: left;
-}
-
 .ft-column-right
 {
     float: right;
-    margin-left: 0px;
+    margin-left: -10px;
 }
 
 .ft-column-mid
 {
-    text-align: center;
+    margin-left: 0;
 }
 
 .footer-content
@@ -514,12 +504,10 @@ ul#slide-list{
     margin-top: 70px;
 }
 
-.underline
-{
+.underline {
+    color:grey;
     text-decoration: underline;
-    -webkit-text-decoration-color: gray;
-    text-decoration-color: gray; 
-    font-size: 1pt;
+    font-size:1pt;
 }
 
 .lbl-large-bold
@@ -531,9 +519,8 @@ ul#slide-list{
     font-family: GothamBold;
     margin: 0;  
     color: #fff;
-    margin-left: 0px;
+    margin-left: -15px;
 }
-
 
 .lbl-small
 {
@@ -543,7 +530,7 @@ ul#slide-list{
     font-family: Gotham;
     letter-spacing: 1px;
     margin: 0;
-    margin-left: 0px;
+    margin-left: 15px;
     margin-top: 2px;
     color: #fff;
 }
@@ -600,13 +587,12 @@ ul#slide-list{
      /*padding: 0 10px;*/
     text-align: center;
     margin-top: 20px;
-    padding-left: 0px;
 }
 
 .ft-img-social
 {
     float: left;
-    margin-right: 15px;
+    width: 50px;
 }
 
 .ft-img-social li a
@@ -641,7 +627,7 @@ ul#slide-list{
 .foot-subscribe 
 {
     padding-top: 10px;
-    padding-left: 0px;
+    padding-left: 25px;
 }
 
 .ft-box input#txtEmail
@@ -655,12 +641,13 @@ ul#slide-list{
 
 .ft-box
 {    
-    width: 100%;
+    min-width: 55%;
+    max-width: 60%;
     height: 25px;
     border: 1px solid #fff;
     border-radius: 3px;
     display: inline-block;
-    margin-left: 0px;
+    margin-left: -20px;
 }
 
 .ft-box-button
@@ -673,9 +660,8 @@ ul#slide-list{
     background: #232323;
     border: 1px solid #fff;
     margin-top: 5px;  
-    /*min-width:60%;
-    max-width:80%;*/
-    width: 100%;
+    min-width:60%;
+    max-width:80%;
     height: 25px;
     float: left;
     border-radius: 3px;

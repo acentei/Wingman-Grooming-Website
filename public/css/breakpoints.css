@@ -615,13 +615,7 @@
         width: 100%;
         padding: 0px;
     }
-
-    .footer-column-each
-    {
-        width: 100%;
-        text-align: center;
-    }
-        
+    
     .ft-column-mid 
     {
         margin-top: 50px;
@@ -673,7 +667,7 @@
     .foot-subscribe 
     {
         padding-top: 10px;
-        padding-left: 0px;
+        padding-left: 20px;
         margin: auto;
         display: block;
         width: 50%;
@@ -1370,12 +1364,6 @@
         width: 100%;
         padding: 0px;
     }
-
-    .footer-column-each
-    {
-        width: 100%;
-        text-align: center;
-    }
     
     .ft-column-mid 
     {
@@ -1647,9 +1635,10 @@
     .foot-subscribe 
     {
         padding-top: 10px;
-        padding-left: 0px;
+        padding-left: 20px;
         margin: auto;
         display: block;
+        width: 80%;
     }
     
     .ft-box-button input#btnSubscribe 
@@ -1768,10 +1757,12 @@
 
     .foot-subscribe {
         padding-top: 10px;
-        padding-left: 0px;
+        padding-left: 20px;
         margin: auto;
         display: block;
-        margin-left: 0;
+        /*width: 80%;*/
+        width: 55%;
+        margin-left: 23.5%;
     }
 
     .ft-box {
