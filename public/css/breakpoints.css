@@ -1727,7 +1727,7 @@
     
     .ft-box
     {
-        min-width: 55%;
+        min-width: 80%;
     }
 
     .nl-article-box
@@ -1752,7 +1752,7 @@
 
     .prod-hover-top
     {
-        margin: 0 auto 48% 1px;
+        margin: 0 auto -35px 0;
     }
 
     .ft-box-button input#btnSubscribe {
@@ -1773,21 +1773,33 @@
         display: block;
         margin-left: 0;
     }
-
-    .ft-box {
-        min-width: 100%;
-    }
     
 }
 
 @media screen and (min-device-width : 1439px) and (max-device-width : 2098px) 
 {
-/* Styles */
+    .container
+    {
+        width: 1300px;
+    }
+    
+    .cart-title 
+    {
+        margin-right: 20px;
+    }
 }
 
 @media screen and (min-device-width : 2099px)
 {
-/* Styles */
+    .container
+    {
+        width: 1550px;
+    }
+    
+    .cart-title 
+    {
+        margin-right: 20px;
+    }
 }
 
 /* NAVBAR ONLY AND EXTRA CSS THAT ONLY VISIBLE IN MOBILE */
