@@ -124,7 +124,7 @@
                                             data-id="{{$product->product_id}}" data-productcode="{{$product->product_code}}" 
                                             data-stock="{{$product->stocks}}" data-brandname="{{$product['brand']->display_name}}">
                                             
-                                            <span class="glyphicon glyphicon-search" style="color: black;padding-left: 160px;"></span>
+                                            <span class="glyphicon glyphicon-search" style="color: black;"></span>
                                         </a>
 
                                         <a href="{{ route('shop.show',$product->slug) }}" class="shop-mob">
