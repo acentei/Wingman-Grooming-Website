@@ -181,7 +181,16 @@
                     <div class="shop-show-col col-sm-2">                              
                         {{$product->stocks}}
                     </div>       
-                </div>                            
+                </div>     
+
+                <div class="form-group">   
+                    <label for="title" class="col-sm-2 control-label">Tags</label>    
+                    <div class="shop-show-col col-sm-2">  
+
+                        {{trim($product->tags,"{ }")}}
+                    
+                    </div>       
+                </div>                        
                 
             </div>
         </div>
