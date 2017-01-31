@@ -35,10 +35,10 @@
         <div id="brandName" class="shop-brand-name">ALL</div>
 
         <div class="shop-category">                    
-            <a id="cat0" href="{{ route('shop.index', ['category' => 'All','brand' => Session::get('brand_name')])}}">ALL</a>                
+            <a id="cat0" href="{{ route('shop.index', ['filter' => Session::get('filter'),'category' => 'All','brand' => Session::get('brand_name')])}}">ALL</a>                
             <!-- LOAD ALL AVAILABEL PRODUCT TYPE -->
             @foreach($prodtype as $type)                    
-                <a id="cat{{$type->product_type_id}}" href="{{ route('shop.index', ['category' => $type->display_name, 'brand' => Session::get('brand_name')]) }}">                    
+                <a id="cat{{$type->product_type_id}}" href="{{ route('shop.index', ['filter' => Session::get('filter'),'category' => $type->display_name, 'brand' => Session::get('brand_name')]) }}">                    
                     {{$type->display_name}}                    
                 </a>                    
             @endforeach                
@@ -55,11 +55,27 @@
         <div class="shop-listing">
             <div class="shop-left">
                 <div class="shop-browse-title">
+                    FILTER
+                </div>
+                
+                <div class="shop-browse-list">
+                    <select id="dd-filter" class="dd-general" onchange="filter();">
+                        <option value="{{ route('shop.index', ['filter' => 'name-asc','brand' => Session::get('brand_name'),'category' => Session::get('type_name')])}}" selected>Alphabetical(A-Z)</option>
+                        <option value="{{ route('shop.index', ['filter' => 'name-desc','brand' => Session::get('brand_name'),'category' => Session::get('type_name')])}}">Alphabetical(Z-A)</option>
+                        <option value="{{ route('shop.index', ['filter' => 'price-asc','brand' => Session::get('brand_name'),'category' => Session::get('type_name')])}}">Lowest Price</option>
+                        <option value="{{ route('shop.index', ['filter' => 'price-desc','brand' => Session::get('brand_name'),'category' => Session::get('type_name')])}}">Highest Price</option>
+                        <option value="{{ route('shop.index', ['filter' => 'created_date-desc','brand' => Session::get('brand_name'),'category' => Session::get('type_name')])}}">Newest</option>
+                        <option value="{{ route('shop.index', ['filter' => 'created_date-asc','brand' => Session::get('brand_name'),'category' => Session::get('type_name')])}}">Oldest</option>
+
+                    </select>
+                </div>
+                
+                <div class="shop-browse-title">
                     BROWSE BY BRANDS
                 </div>
                 
                 <div class="shop-browse-list">
-                    <a id="brand0" href="{{ route('shop.index', ['brand' => 'All','category' => Session::get('type_name')])}}">
+                    <a id="brand0" href="{{ route('shop.index', ['filter' => Session::get('filter'),'brand' => 'All','category' => Session::get('type_name')])}}">
                         <div class="browse-list-name">All</div>
                     </a>          
 
@@ -73,7 +89,7 @@
                     
                     <!-- LOAD ALL AVAILABEL PRODUCT TYPE -->
                     @foreach($brand as $brand)                    
-                        <a id="brand{{$brand->brand_id}}" href="{{ route('shop.index', ['brand' => $brand->display_name,'category' => Session::get('type_name')]) }}">
+                        <a id="brand{{$brand->brand_id}}" href="{{ route('shop.index', ['filter' => Session::get('filter'),'brand' => $brand->display_name,'category' => Session::get('type_name')]) }}">
                             <div class="browse-list-name">
                                 {{$brand->display_name}}
                             </div>
@@ -122,7 +138,8 @@
                                             data-description="{{$product->description}}" data-details="{{$product['property']}}"
                                             data-related="{{$product['brand']['product']}}"
                                             data-id="{{$product->product_id}}" data-productcode="{{$product->product_code}}" 
-                                            data-stock="{{$product->stocks}}" data-brandname="{{$product['brand']->display_name}}">
+                                            data-stock="{{$product->stocks}}" data-brandname="{{$product['brand']->display_name}}"
+                                            data-tags="{{json_encode($product->tags)}}">
                                             
                                             <span class="glyphicon glyphicon-search" style="color: black;padding-left: 160px;"></span>
                                         </a>
@@ -327,7 +344,18 @@
                     $.cookie('brand_class', toBrowse.attr('class'));                   
                     $.cookie('brand_id', $(this).attr('id'));                   
                 });
-        });     
+        });
+
+        //setActive filter
+        $(document).ready(function(){
+            $('#dd-filter').val(window.location.href);
+        });
+        
+        //filter page
+        function filter()
+        {
+            window.location.href = document.getElementById('dd-filter').value;
+        }
 
     </script> 
 

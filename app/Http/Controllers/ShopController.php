@@ -62,7 +62,8 @@ class ShopController extends Controller
         $search = \Request::get('search');
         $reqBrand = \Request::get('brand');
         $reqType = \Request::get('category');
-
+        $reqFilter = \Request::get('filter');
+        
         $this->selectedType = ProductType::where('display_name',\Request::get('category'))
                                         ->where('active',1)
                                         ->where('deleted',0)
@@ -99,12 +100,32 @@ class ShopController extends Controller
             setcookie('cat_class', '');
             setcookie('cat_id', '');
         }
+        
+        if(!empty($reqFilter))
+        {
+            $isFilter = "true";
+            Session::put('filter', $reqFilter); 
+            
+            $filter = explode("-", \Request::get('filter'));
+        
+            $filterName = $filter[0];
+            $filterAct = $filter[1];
+        }
+        else
+        {
+            $filterName = 'name';
+            $filterAct = 'asc';
+            
+//            setcookie('brand_class', '');
+//            setcookie('brand_id', '');
+        }
 
 
         $product = Product::with('property','brand.product','brand.product.property') 
                           ->where(function($query) {
                                 $query->where('name','LIKE','%'.\Request::get('search').'%')
-                                      ->orWhere('description','LIKE','%'.\Request::get('search').'%');
+                                      ->orWhere('description','LIKE','%'.\Request::get('search').'%')
+                                      ->orWhere('tags','LIKE','%'.\Request::get('search').'%');
                             })  
                           ->whereHas('brand',function ($query) {
                                 if(count($this->selectedBrand) != 0)
@@ -118,55 +139,12 @@ class ShopController extends Controller
                                     $query->where('product_type_id','=',$this->selectedType[0]->product_type_id);  
                                 }   
                             })
+                         
                           ->where('active',1)
-                          ->where('deleted',0)
-                          ->orderBy('name','ASC')                                       
-                          ->paginate(12);
-          
-        //get product
-        // $product = Product::with('property');   
-        
-        // if(($reqType == 'All') && ($reqBrand !=  'All'))
-        // {
-        //     $product->whereHas('brand',function ($query) {
-        //         $query->where('brand_id',$this->selectedBrand[0]->brand_id);
-        //     });            
-        // }
-        // elseif(($reqType != 'All') && ($reqBrand ==  'All'))
-        // {
-            
-        //     $product->whereHas('producttype',function ($query) {
-        //         $query->where('product_type_id',$this->selectedType[0]->product_type_id);
-        //     });            
-        // }
-        //     $product->where('active',1);
-        //     $product->where('deleted',0);
-        //     $product->orderBy('created_date','DESC');                                        
-        //     $product->paginate(12); 
-
-        //     return $product;
-           
-        //end get product
-
-       // return $this->selectedType[0]->product_type_id;
-
-        // $product = Product::with('property')  
-        //                   ->with('producttype' => function($query){
-                                    
-        //                                 $query->whereHas('product_type_id','=',$this->selectedType[0]->product_type_id);                             
-                                   
-        //                         })
-        //                   ->with('brand' => function($query){
-                                    
-        //                                 $query->whereHas('brand_id','=',$this->selectedBrand[0]->brand_id);    
-                                                            
-        //                         })
-        //                   ->where('active',1)
-        //                   ->where('deleted',0)
-        //                   ->orderBy('created_date','DESC')                                          
-        //                   ->paginate(12);      
-        
-
+                          ->where('deleted',0)     
+                          ->orderBy($filterName,$filterAct)
+                          ->paginate(12);        
+                        
         return view('pages.shop.index',['brand' => $brand,'prodtype' => $type,'products' => $product,'now' => $this->dateNow, 
                                         'brandList' => $brandList,'isSearch' => $isSearch,'search' => $search] );
     }

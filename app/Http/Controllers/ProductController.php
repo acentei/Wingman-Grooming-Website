@@ -102,6 +102,7 @@ class ProductController extends Controller
         $product->description = $request->description;
         $product->price = $request->price;
         $product->stocks = $request->stock;
+        $product->tags = '{'.$request->tags.'}';;
         
         $product->save();
         
@@ -223,8 +224,8 @@ class ProductController extends Controller
             $finalSluggable = $request->pcode.' '.$request->pname.' '.$sameSlugCount;
 
             $product->slug = Str::slug($finalSluggable); 
-        }
-        
+        }        
+
         $product->product_code = $request->pcode;
         $product->product_type_id = $request->type;
         $product->brand_id = $request->brand;
@@ -232,6 +233,7 @@ class ProductController extends Controller
         $product->description = $request->description;
         $product->price = $request->price;
         $product->stocks = $request->stock;
+        $product->tags = '{'.$request->tags.'}';
         $product->modified_date = date('Y-m-d H:i:s');
         $product->modified_by = "ADMIN";
         

@@ -104,7 +104,7 @@
                                 Nulla mauris enim, tincidunt a elit eget, maximus cursus magna. 
                             </div> --}}
                             
-                        </div>
+                        </div>                        
                     </div>
                 </div>
                 
@@ -311,6 +311,29 @@
         {            
             $(".details-properties").append('<div class="product-ingredients"><span font-family: BebasNeue;text-transform:uppercase; font-size: 18pt;>'+$jsonDetails[count]['name']+' : </span><span style="padding-top: 10px; font-weight:bold;font-size: 11pt; font-family: Gotham;">'+$jsonDetails[count]['value']+'</span><br>');
         } 
+      }
+
+      //add tags
+      $tags = $(e.relatedTarget).attr('data-tags');
+
+      $jsontags = JSON.parse($tags);
+
+      $jsontags = $jsontags.replace("{","");
+      $jsontags = $jsontags.replace("}","");
+
+      $(".details-properties").append('<br><div class="product-ingredients"><span font-family: BebasNeue;text-transform:uppercase; font-size: 18pt;> TAGS </span>');
+
+      for(count = 0; count < $jsontags.split(',').length; count++)
+      {
+          if(count < $jsontags.split(',').length-1)
+          {
+            $(".details-properties").append('<span style="padding-top: 10px; font-weight:bold;font-size: 11pt; font-family: Gotham;"><a target="_blank" href="http://localhost:8080/wingmangrooming/public/index.php/shop?search='+$jsontags.split(',')[count]+'">'+$jsontags.split(',')[count]+'</a>,&nbsp;</span>');
+          }
+          else
+          {
+            $(".details-properties").append('<span style="padding-top: 10px; font-weight:bold;font-size: 11pt; font-family: Gotham;"><a target="_blank" href="http://localhost:8080/wingmangrooming/public/index.php/shop?search='+$jsontags.split(',')[count]+'">'+$jsontags.split(',')[count]+'</a></span><br>');
+          }
+          
       }
 
       for(count = 0; count <= 2; count++)

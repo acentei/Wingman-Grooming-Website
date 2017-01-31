@@ -227,6 +227,13 @@
                         <input type="number" name="stock" value="{{$product->stocks}}" class="form-control" placeholder="0" min="0" required />
                     </div>       
                 </div>
+
+                <div class="form-group">   
+                    <label for="title" class="col-sm-2 control-label">Tags</label>    
+                    <div class="col-sm-10">                              
+                        <textarea name="tags" rows="5" class="form-control" style="resize:none;">{{$product->tags}}</textarea>
+                    </div>       
+                </div>
                                 
                 <div class="form-group">   
                     <label for="title" class="col-sm-2 control-label"></label>    
